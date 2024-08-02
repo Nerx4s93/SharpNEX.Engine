@@ -12,6 +12,7 @@ namespace SharpNEX.Engine
         private readonly string _name;
 
         private FormManager _formManager;
+        private Size _formSize;
 
         private Thread _gameThread;
 
@@ -19,17 +20,19 @@ namespace SharpNEX.Engine
         {
             _name = Name;
             this.Scene = Scene;
-
-            _formManager = new FormManager(this, Name, Size);
-            _formManager.Run();
+            _formSize = Size;
         }
 
         public Scene Scene;
 
         public void Run()
         {
+            _formManager = new FormManager(this, _name, _formSize);
+
             _gameThread = new Thread(Handler);
             _gameThread.Start();
+
+            _formManager.Run();
         }
 
         public void Stop()
@@ -39,6 +42,8 @@ namespace SharpNEX.Engine
 
         public void Handler()
         {
+            while (!_formManager.IsShown) { }
+
             FPS fps = new FPS();
 
             while (true)

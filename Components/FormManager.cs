@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -22,21 +23,29 @@ namespace SharpNEX.Engine.Components
             _form.Text = Title;
             _form.Size = Size;
             _form.FormBorderStyle = FormBorderStyle.FixedSingle;
+            _form.Shown += FormShown;
         }
+
+        public bool IsShown { get; private set; }
 
         public void Run()
         {
-            _formThread = new Thread(() =>
-            {
-                Application.Run(_form);
-            });
-            _formThread.Start();
+            Application.Run(_form);
         }
 
         public void Stop()
         {
-            _formThread.Abort();
             _form.Dispose();
+        }
+
+        public Graphics GetGraphics()
+        {
+            return _form.CreateGraphics();
+        }
+
+        private void FormShown(object sender, EventArgs e)
+        {
+            IsShown = true;
         }
     }
 }
