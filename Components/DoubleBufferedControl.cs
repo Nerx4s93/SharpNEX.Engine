@@ -10,10 +10,11 @@ namespace SharpNEX.Engine.Components
         public DoubleBufferedControl(Size formSize, Color clearColor)
         {
             _image = new Bitmap(formSize.Width, formSize.Height);
+            Graphics = Graphics.FromImage(_image);
             _clearColor = clearColor;
         }
 
-        public Graphics Graphics => Graphics.FromImage(_image);
+        public Graphics Graphics;
 
         public void Clear()
         {
