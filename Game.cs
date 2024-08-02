@@ -23,6 +23,8 @@ namespace SharpNEX.Engine
             _formSize = Size;
         }
 
+        public static Graphics FormGraphics;
+
         public Scene Scene;
 
         public void Run()
@@ -50,12 +52,14 @@ namespace SharpNEX.Engine
             {
                 var stopwatch = Stopwatch.StartNew();
 
+                FormGraphics = _formManager.GetGraphics();
+                FormGraphics.Clear(Color.White);
+
                 Scene.Update();
 
                 stopwatch.Stop();
 
                 fps.AddTik(Convert.ToInt32(stopwatch.ElapsedMilliseconds));
-                Console.WriteLine(fps.GetFPS());
             }
         }
     }
