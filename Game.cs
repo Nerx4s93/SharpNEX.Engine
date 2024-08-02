@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace SharpNEX.Engine
 {
@@ -29,9 +31,18 @@ namespace SharpNEX.Engine
 
         public void Handler()
         {
+            FPS fps = new FPS();
+
             while (true)
             {
+                var stopwatch = Stopwatch.StartNew();
+
                 Scene.Update();
+
+                stopwatch.Stop();
+
+                fps.AddTik(Convert.ToInt32(stopwatch.ElapsedMilliseconds));
+                Console.WriteLine(fps.GetFPS());
             }
         }
     }
