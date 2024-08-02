@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading;
+
+using SharpNEX.Engine.Components;
 
 namespace SharpNEX.Engine
 {
@@ -8,12 +11,17 @@ namespace SharpNEX.Engine
     {
         private readonly string _name;
 
+        private FormManager _formManager;
+
         private Thread _gameThread;
 
-        public Game(string Name, Scene Scene)
+        public Game(string Name, Scene Scene, Size Size)
         {
             _name = Name;
             this.Scene = Scene;
+
+            _formManager = new FormManager(this, Name, Size);
+            _formManager.Run();
         }
 
         public Scene Scene;
