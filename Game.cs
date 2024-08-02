@@ -11,6 +11,7 @@ namespace SharpNEX.Engine
     {
         private readonly string _name;
 
+        private DoubleBufferedControl _doubleBufferedControl;
         private FormManager _formManager;
         private Size _formSize;
 
@@ -29,6 +30,7 @@ namespace SharpNEX.Engine
 
         public void Run()
         {
+            _doubleBufferedControl = new DoubleBufferedControl(_formSize, Color.White);
             _formManager = new FormManager(this, _name, _formSize);
 
             _gameThread = new Thread(Handler);
@@ -52,14 +54,18 @@ namespace SharpNEX.Engine
             {
                 var stopwatch = Stopwatch.StartNew();
 
-                FormGraphics = _formManager.GetGraphics();
-                FormGraphics.Clear(Color.White);
+                FormGraphics = _doubleBufferedControl.Graphics;
+                _doubleBufferedControl.Clear();
 
                 Scene.Update();
+
+                _doubleBufferedControl.Draw(_formManager.GetGraphics());
 
                 stopwatch.Stop();
 
                 fps.AddTik(Convert.ToInt32(stopwatch.ElapsedMilliseconds));
+
+                Console.WriteLine("FPS : {0}", fps.GetFPS());
             }
         }
     }

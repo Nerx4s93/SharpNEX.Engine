@@ -37,6 +37,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DoubleBufferedControl.cs" />
     <Compile Include="Components\FormManager.cs" />
     <Compile Include="FPS.cs" />
     <Compile Include="Game.cs" />
@@ -45,6 +46,7 @@
     <Compile Include="Quartion.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Script.cs" />
+    <Compile Include="Scripts\ImageRender.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

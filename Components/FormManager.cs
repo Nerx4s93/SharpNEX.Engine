@@ -38,7 +38,7 @@ namespace SharpNEX.Engine.Components
             _form.Dispose();
         }
 
-        public Graphics GetGraphics()
+        internal Graphics GetGraphics()
         {
             return _form.CreateGraphics();
         }
