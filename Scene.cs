@@ -21,6 +21,7 @@ namespace SharpNEX.Engine
                 {
                     if (!script.IsScriptStarted)
                     {
+                        script.GameObject = gameObject;
                         script.Start();
                         script.IsScriptStarted = true;
                     }
