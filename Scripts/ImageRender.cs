@@ -25,8 +25,6 @@
             {
                 Game.Render(Image, newPosition, newRotation);
             }
-
-            GameObject.Rotation = new Quartion(GameObject.Rotation.Angle + 0.05f);
         }
     }
 }
