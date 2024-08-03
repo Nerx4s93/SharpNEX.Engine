@@ -68,6 +68,20 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Transform = transformMatrix;
         }
 
+        public void Render(string imagePath, Vector position)
+        {
+            Bitmap bitmap = _bitmapCache[imagePath];
+
+            var transformMatrix = _renderTarget.Transform;
+
+            var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
+            _renderTarget.Transform = translationToPosition;
+
+            _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
+
+            _renderTarget.Transform = transformMatrix;
+        }
+
         internal void Dispose()
         {
             _renderTarget.Dispose();
