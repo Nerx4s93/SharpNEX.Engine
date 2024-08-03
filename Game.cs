@@ -12,7 +12,7 @@ namespace SharpNEX.Engine
         private readonly string _name;
 
         private FormManager _formManager;
-        private ImageRender _imageRender;
+        private static ImageRender _imageRender;
 
         private Size _formSize;
 
@@ -26,6 +26,8 @@ namespace SharpNEX.Engine
         }
 
         public Scene Scene;
+
+        public static void Render(string imagePath) => _imageRender.Render(imagePath);
 
         public void Run()
         {
