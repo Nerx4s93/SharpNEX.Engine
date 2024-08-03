@@ -25,7 +25,12 @@ namespace SharpNEX.Engine.Components
             _form.Text = Title;
             _form.Size = Size;
             _form.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             _form.Shown += FormShown;
+            _form.MouseDown += FormMouseDown;
+            _form.MouseUp += FormMouseUp;
+            _form.KeyDown += FormKeyDown;
+            _form.KeyUp += FormKeyUp;
         }
 
         public bool IsShown { get; private set; }
@@ -44,6 +49,50 @@ namespace SharpNEX.Engine.Components
         {
             _imageRender.SetForm(_form);
             IsShown = true;
+        }
+
+        private void FormMouseDown(object sender, MouseEventArgs e)
+        {
+            foreach (var gameObject in _game.Scene.GameObjects)
+            {
+                foreach (var script in gameObject.Scripts)
+                {
+                    script.OnMouseDown();
+                }
+            }
+        }
+
+        private void FormMouseUp(object sender, MouseEventArgs e)
+        {
+            foreach (var gameObject in _game.Scene.GameObjects)
+            {
+                foreach (var script in gameObject.Scripts)
+                {
+                    script.OnMouseUp();
+                }
+            }
+        }
+
+        private void FormKeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (var gameObject in _game.Scene.GameObjects)
+            {
+                foreach (var script in gameObject.Scripts)
+                {
+                    script.OnKeyDown(e);
+                }
+            }
+        }
+
+        private void FormKeyUp(object sender, KeyEventArgs e)
+        {
+            foreach (var gameObject in _game.Scene.GameObjects)
+            {
+                foreach (var script in gameObject.Scripts)
+                {
+                    script.OnKeyUp(e);
+                }
+            }
         }
     }
 }

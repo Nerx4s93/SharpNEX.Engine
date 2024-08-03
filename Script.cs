@@ -1,4 +1,6 @@
-﻿namespace SharpNEX.Engine
+﻿using System.Windows.Forms;
+
+namespace SharpNEX.Engine
 {
     public class Script
     {
@@ -11,5 +13,10 @@
 
         public virtual void Start() { }
         public virtual void Update() { }
+
+        public virtual void OnMouseDown() { }
+        public virtual void OnMouseUp() { }
+        public virtual void OnKeyDown(KeyEventArgs e) { }
+        public virtual void OnKeyUp(KeyEventArgs e) { }
     }
 }
