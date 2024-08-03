@@ -11,8 +11,10 @@ namespace SharpNEX.Engine
     {
         private readonly string _name;
 
-        private DoubleBufferedControl _doubleBufferedControl;
         private FormManager _formManager;
+        private ImageRender _imageRender;
+        private DoubleBufferedControl _doubleBufferedControl;
+
         private Size _formSize;
 
         private Thread _gameThread;
@@ -30,8 +32,9 @@ namespace SharpNEX.Engine
 
         public void Run()
         {
+            _imageRender = new ImageRender();
             _doubleBufferedControl = new DoubleBufferedControl(_formSize, Color.White);
-            _formManager = new FormManager(this, _name, _formSize);
+            _formManager = new FormManager(this, _imageRender, _name, _formSize);
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();
@@ -66,11 +69,12 @@ namespace SharpNEX.Engine
 
         private void BodyHandler()
         {
-            _doubleBufferedControl.Clear();
+            _imageRender.BeginDraw();
+            _imageRender.Clear();
 
             Scene.Update();
 
-            _doubleBufferedControl.Draw(_formManager.Graphics);
+            _imageRender.EndDraw();
         }
     }
 }

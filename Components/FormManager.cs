@@ -8,13 +8,15 @@ namespace SharpNEX.Engine.Components
     internal class FormManager
     {
         private readonly Game _game;
+        private ImageRender _imageRender;
 
         private Form _form;
         private Thread _formThread;
 
-        public FormManager(Game Game, string Title, Size Size)
+        public FormManager(Game Game, ImageRender imageRender, string Title, Size Size)
         {
             _game = Game;
+            _imageRender = imageRender;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -38,13 +40,9 @@ namespace SharpNEX.Engine.Components
             _form.Dispose();
         }
 
-        internal Graphics GetGraphics()
-        {
-            return _form.CreateGraphics();
-        }
-
         private void FormShown(object sender, EventArgs e)
         {
+            _imageRender.SetForm(_form);
             IsShown = true;
         }
     }
