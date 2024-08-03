@@ -32,11 +32,11 @@ namespace SharpNEX.Engine.Components
             _bitmapCache = new Dictionary<string, Bitmap>();
         }
 
-        public void BeginDraw() => _renderTarget.BeginDraw();
+        internal void BeginDraw() => _renderTarget.BeginDraw();
 
-        public void EndDraw() => _renderTarget.EndDraw();
+        internal void EndDraw() => _renderTarget.EndDraw();
 
-        public void Clear()
+        internal void Clear()
         {
             _renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
         }
@@ -47,7 +47,7 @@ namespace SharpNEX.Engine.Components
             _renderTarget.DrawBitmap(_bitmapCache[imagePath], 1.0f, BitmapInterpolationMode.Linear);
         }
 
-        public void Dispose()
+        internal void Dispose()
         {
             _renderTarget.Dispose();
         }
