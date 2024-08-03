@@ -43,7 +43,7 @@ namespace SharpNEX.Engine
             _gameThread.Abort();
         }
 
-        public void Handler()
+        private void Handler()
         {
             while (!_formManager.IsShown) { }
 
