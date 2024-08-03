@@ -27,7 +27,7 @@ namespace SharpNEX.Engine
 
         public Scene Scene;
 
-        public static void Render(string imagePath) => _imageRender.Render(imagePath);
+        public static void Render(string imagePath, Vector position, Quartion rotation) => _imageRender.Render(imagePath, position, rotation);
 
         public void Run()
         {

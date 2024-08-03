@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+
+using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
 
@@ -41,10 +43,29 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
         }
 
-        public void Render(string imagePath)
+        public void Render(string imagePath, Vector position, Quartion rotation)
         {
             LoadImage(imagePath);
-            _renderTarget.DrawBitmap(_bitmapCache[imagePath], 1.0f, BitmapInterpolationMode.Linear);
+
+            Bitmap bitmap = _bitmapCache[imagePath];
+
+            float x = position.X + bitmap.Size.Width / 2;
+            float y = position.Y + bitmap.Size.Height / 2;
+
+            var transformMatrix = _renderTarget.Transform;
+
+            var translationToOrigin = Matrix3x2.Translation(x, y);
+            var rotationMatrix = Matrix3x2.Rotation(rotation.Angle);
+            var translationBack = Matrix3x2.Translation(-x, -y);
+            var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
+
+            var combinedMatrix = translationToPosition * translationBack * rotationMatrix * translationToOrigin;
+
+            _renderTarget.Transform = combinedMatrix;
+
+            _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
+
+            _renderTarget.Transform = transformMatrix;
         }
 
         internal void Dispose()
