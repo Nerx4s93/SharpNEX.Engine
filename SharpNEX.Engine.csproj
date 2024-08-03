@@ -46,7 +46,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\DoubleBufferedControl.cs" />
     <Compile Include="Components\FormManager.cs" />
     <Compile Include="FPS.cs" />
     <Compile Include="Game.cs" />

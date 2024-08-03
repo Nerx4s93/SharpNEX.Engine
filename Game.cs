@@ -13,7 +13,6 @@ namespace SharpNEX.Engine
 
         private FormManager _formManager;
         private ImageRender _imageRender;
-        private DoubleBufferedControl _doubleBufferedControl;
 
         private Size _formSize;
 
@@ -26,14 +25,11 @@ namespace SharpNEX.Engine
             _formSize = Size;
         }
 
-        public static Graphics FormGraphics;
-
         public Scene Scene;
 
         public void Run()
         {
             _imageRender = new ImageRender();
-            _doubleBufferedControl = new DoubleBufferedControl(_formSize, Color.White);
             _formManager = new FormManager(this, _imageRender, _name, _formSize);
 
             _gameThread = new Thread(Handler);
@@ -52,7 +48,6 @@ namespace SharpNEX.Engine
             while (!_formManager.IsShown) { }
 
             FPS fps = new FPS();
-            FormGraphics = _doubleBufferedControl.Graphics;
 
             while (true)
             {
