@@ -49,24 +49,28 @@ namespace SharpNEX.Engine
             while (!_formManager.IsShown) { }
 
             FPS fps = new FPS();
+            FormGraphics = _doubleBufferedControl.Graphics;
 
             while (true)
             {
                 var stopwatch = Stopwatch.StartNew();
 
-                FormGraphics = _doubleBufferedControl.Graphics;
-                _doubleBufferedControl.Clear();
-
-                Scene.Update();
-
-                _doubleBufferedControl.Draw(_formManager.GetGraphics());
+                BodyHandler();
 
                 stopwatch.Stop();
 
                 fps.AddTik(Convert.ToInt32(stopwatch.ElapsedMilliseconds));
-
                 Console.WriteLine("FPS : {0}", fps.GetFPS());
             }
+        }
+
+        private void BodyHandler()
+        {
+            _doubleBufferedControl.Clear();
+
+            Scene.Update();
+
+            _doubleBufferedControl.Draw(_formManager.Graphics);
         }
     }
 }
