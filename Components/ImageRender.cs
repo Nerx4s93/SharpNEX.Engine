@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Windows.Forms;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
 
@@ -8,12 +8,15 @@ namespace SharpNEX.Engine.Components
 {
     internal class ImageRender
     {
-        private readonly WindowRenderTarget _renderTarget;
+        private WindowRenderTarget _renderTarget;
 
         private Dictionary<string, Bitmap> _bitmapCache;
 
-        public ImageRender(IntPtr hwnd, int width, int height)
+        public void SetForm(Form form)
         {
+            IntPtr hwnd = form.Handle;
+            int width = form.Width; int height = form.Height;
+
             var factory = new Factory();
             var renderProps = new RenderTargetProperties(
                 new PixelFormat(SharpDX.DXGI.Format.B8G8R8A8_UNorm, AlphaMode.Premultiplied)
