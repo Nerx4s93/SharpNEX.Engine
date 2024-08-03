@@ -25,7 +25,7 @@ namespace SharpNEX.Engine
             _formSize = Size;
         }
 
-        public Scene Scene;
+        public Scene Scene { get; internal set; }
 
         public static void Render(string imagePath, Vector position, Quartion rotation) => _imageRender.Render(imagePath, position, rotation);
         public static void Render(string imagePath, Vector position) => _imageRender.Render(imagePath, position);
