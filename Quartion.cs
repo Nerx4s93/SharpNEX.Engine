@@ -8,5 +8,15 @@
         }
 
         public float Angle;
+
+        public static Quartion operator +(Quartion a, Quartion b)
+        {
+            return new Quartion(a.Angle + b.Angle);
+        }
+
+        public static Quartion operator -(Quartion a, Quartion b)
+        {
+            return new Quartion(a.Angle - b.Angle);
+        }
     }
 }

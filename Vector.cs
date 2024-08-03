@@ -12,5 +12,15 @@
         public float Y;
 
         public static Vector Zero = new Vector(0, 0);
+
+        public static Vector operator +(Vector a, Vector b)
+        {
+            return new Vector(a.X + b.X, a.Y + b.Y);
+        }
+
+        public static Vector operator -(Vector a, Vector b)
+        {
+            return new Vector(a.X - b.X, a.Y - b.Y);
+        }
     }
 }
