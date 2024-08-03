@@ -8,9 +8,9 @@ namespace SharpNEX.Engine.Components
 {
     internal class ImageRender
     {
-        private readonly WindowRenderTarget renderTarget;
+        private readonly WindowRenderTarget _renderTarget;
 
-        private Dictionary<string, Bitmap> bitmapCache;
+        private Dictionary<string, Bitmap> _bitmapCache;
 
         public ImageRender(IntPtr hwnd, int width, int height)
         {
@@ -25,33 +25,33 @@ namespace SharpNEX.Engine.Components
                 PresentOptions = PresentOptions.None
             };
 
-            renderTarget = new WindowRenderTarget(factory, renderProps, hwndRenderTargetProps);
-            bitmapCache = new Dictionary<string, Bitmap>();
+            _renderTarget = new WindowRenderTarget(factory, renderProps, hwndRenderTargetProps);
+            _bitmapCache = new Dictionary<string, Bitmap>();
         }
 
-        public void BeginDraw() => renderTarget.BeginDraw();
+        public void BeginDraw() => _renderTarget.BeginDraw();
 
-        public void EndDraw() => renderTarget.EndDraw();
+        public void EndDraw() => _renderTarget.EndDraw();
 
         public void Clear()
         {
-            renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
+            _renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
         }
 
         public void Render(string imagePath)
         {
             LoadImage(imagePath);
-            renderTarget.DrawBitmap(bitmapCache[imagePath], 1.0f, BitmapInterpolationMode.Linear);
+            _renderTarget.DrawBitmap(_bitmapCache[imagePath], 1.0f, BitmapInterpolationMode.Linear);
         }
 
         public void Dispose()
         {
-            renderTarget.Dispose();
+            _renderTarget.Dispose();
         }
 
         private void LoadImage(string imagePath)
         {
-            if (bitmapCache.ContainsKey(imagePath))
+            if (_bitmapCache.ContainsKey(imagePath))
             {
                 return;
             }
@@ -64,7 +64,7 @@ namespace SharpNEX.Engine.Components
             var converter = new SharpDX.WIC.FormatConverter(imagingFactory);
             converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPBGRA);
 
-            bitmapCache.Add(imagePath, Bitmap.FromWicBitmap(renderTarget, converter));
+            _bitmapCache.Add(imagePath, Bitmap.FromWicBitmap(_renderTarget, converter));
         }
     }
 }
