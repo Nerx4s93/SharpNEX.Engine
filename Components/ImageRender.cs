@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
 
-namespace SharpNEX.Engine
+namespace SharpNEX.Engine.Components
 {
     internal class ImageRender
     {

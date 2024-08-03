@@ -51,7 +51,7 @@
     <Compile Include="FPS.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
-    <Compile Include="ImageRender.cs" />
+    <Compile Include="Components\ImageRender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quartion.cs" />
     <Compile Include="Scene.cs" />
