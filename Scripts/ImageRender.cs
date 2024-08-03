@@ -14,7 +14,18 @@
                 return;
             }
 
-            Game.Render(Image, GameObject.Position, GameObject.Rotation);
+            Vector newPosition = Position + DeltaPosition;
+            Quartion newRotation = Rotation + DeltaRotation;
+
+            if (newRotation.Angle == 0)
+            {
+                Game.Render(Image, newPosition);
+            }
+            else
+            {
+                Game.Render(Image, newPosition, newRotation);
+            }
+
             GameObject.Rotation = new Quartion(GameObject.Rotation.Angle + 0.05f);
         }
     }
