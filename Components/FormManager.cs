@@ -8,12 +8,12 @@ namespace SharpNEX.Engine.Components
     internal class FormManager
     {
         private readonly Game _game;
-        private ImageRender _imageRender;
+        private GraphicsRender _imageRender;
 
         private Form _form;
         private Thread _formThread;
 
-        public FormManager(Game Game, ImageRender imageRender, string Title, Size Size)
+        public FormManager(Game Game, GraphicsRender imageRender, string Title, Size Size)
         {
             _game = Game;
             _imageRender = imageRender;
