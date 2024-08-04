@@ -8,7 +8,7 @@ using SharpDX.Mathematics.Interop;
 
 namespace SharpNEX.Engine.Components
 {
-    internal class ImageRender
+    internal class GraphicsRender
     {
         private WindowRenderTarget _renderTarget;
 
