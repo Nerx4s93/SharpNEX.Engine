@@ -34,15 +34,6 @@ namespace SharpNEX.Engine.Components
             _bitmapCache = new Dictionary<string, Bitmap>();
         }
 
-        internal void BeginDraw() => _renderTarget.BeginDraw();
-
-        internal void EndDraw() => _renderTarget.EndDraw();
-
-        internal void Clear()
-        {
-            _renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
-        }
-
         public void Render(string imagePath, Vector position, Quartion rotation)
         {
             LoadImage(imagePath);
@@ -80,6 +71,15 @@ namespace SharpNEX.Engine.Components
             _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
 
             _renderTarget.Transform = transformMatrix;
+        }
+
+        internal void BeginDraw() => _renderTarget.BeginDraw();
+
+        internal void EndDraw() => _renderTarget.EndDraw();
+
+        internal void Clear()
+        {
+            _renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
         }
 
         internal void Dispose()
