@@ -58,7 +58,9 @@
     <Compile Include="Quartion.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Script.cs" />
-    <Compile Include="Scripts\ImageRender.cs" />
+    <Compile Include="Scripts\BoxHitbox.cs" />
+    <Compile Include="Scripts\IHitbox.cs" />
+    <Compile Include="Scripts\GraphicsRender.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>

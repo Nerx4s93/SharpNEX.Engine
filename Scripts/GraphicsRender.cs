@@ -1,6 +1,6 @@
 ﻿namespace SharpNEX.Engine.Scripts
 {
-    public class ImageRender : Script
+    public class GraphicsRender : Script
     {
         public string Image;
 
