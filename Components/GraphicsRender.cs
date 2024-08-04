@@ -4,7 +4,9 @@ using System.Windows.Forms;
 
 using SharpDX;
 using SharpDX.Direct2D1;
+using SharpDX.Direct2D1.Effects;
 using SharpDX.Mathematics.Interop;
+using static System.Windows.Forms.AxHost;
 
 namespace SharpNEX.Engine.Components
 {
@@ -47,7 +49,7 @@ namespace SharpNEX.Engine.Components
             }
         }
 
-        public void Render(string imagePath, Vector position, Quartion rotation)
+        public void Render(string imagePath, Vector position, Quartion rotation, Vector size)
         {
             LoadImage(imagePath);
 
@@ -62,8 +64,9 @@ namespace SharpNEX.Engine.Components
             var rotationMatrix = Matrix3x2.Rotation(rotation.Angle);
             var translationBack = Matrix3x2.Translation(-x, -y);
             var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
+            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(x, y));
 
-            var combinedMatrix = translationToPosition * translationBack * rotationMatrix * translationToOrigin;
+            var combinedMatrix = translationToPosition * translationBack * rotationMatrix * scaleMatrix * translationToOrigin * scaleMatrix;
 
             _renderTarget.Transform = combinedMatrix;
 
@@ -72,14 +75,21 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Transform = transformMatrix;
         }
 
-        public void Render(string imagePath, Vector position)
+        public void Render(string imagePath, Vector position, Vector size)
         {
+            LoadImage(imagePath);
+
             Bitmap bitmap = _bitmapCache[imagePath];
 
             var transformMatrix = _renderTarget.Transform;
 
+            float x = position.X + bitmap.Size.Width / 2;
+            float y = position.Y + bitmap.Size.Height / 2;
+
             var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
-            _renderTarget.Transform = translationToPosition;
+            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(x, y));
+
+            _renderTarget.Transform = translationToPosition * scaleMatrix;
 
             _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
 
