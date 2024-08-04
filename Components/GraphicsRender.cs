@@ -8,7 +8,7 @@ using SharpDX.Mathematics.Interop;
 
 namespace SharpNEX.Engine.Components
 {
-    internal class GraphicsRender
+    public class GraphicsRender
     {
         private WindowRenderTarget _renderTarget;
 
@@ -32,6 +32,19 @@ namespace SharpNEX.Engine.Components
 
             _renderTarget = new WindowRenderTarget(factory, renderProps, hwndRenderTargetProps);
             _bitmapCache = new Dictionary<string, Bitmap>();
+        }
+
+        public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color)
+        {
+            using (var brush = new SolidColorBrush(_renderTarget, color))
+            {
+                _renderTarget.DrawLine(
+                    new RawVector2(startPoint.X, startPoint.Y),
+                    new RawVector2(endPoint.X, endPoint.Y),
+                    brush,
+                    strokeWidth
+                );
+            }
         }
 
         public void Render(string imagePath, Vector position, Quartion rotation)

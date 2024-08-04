@@ -12,8 +12,6 @@ namespace SharpNEX.Engine
         private readonly string _name;
 
         private FormManager _formManager;
-        private static ImageRender _imageRender;
-
         private Size _formSize;
 
         private Thread _gameThread;
@@ -25,15 +23,14 @@ namespace SharpNEX.Engine
             _formSize = Size;
         }
 
-        public Scene Scene { get; internal set; }
+        public static GraphicsRender GpaphicsRender;
 
-        public static void Render(string imagePath, Vector position, Quartion rotation) => _imageRender.Render(imagePath, position, rotation);
-        public static void Render(string imagePath, Vector position) => _imageRender.Render(imagePath, position);
+        public Scene Scene { get; internal set; }
 
         public void Run()
         {
-            _imageRender = new ImageRender();
-            _formManager = new FormManager(this, _imageRender, _name, _formSize);
+            GpaphicsRender = new GraphicsRender();
+            _formManager = new FormManager(this, GpaphicsRender, _name, _formSize);
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();
@@ -67,12 +64,12 @@ namespace SharpNEX.Engine
 
         private void BodyHandler()
         {
-            _imageRender.BeginDraw();
-            _imageRender.Clear();
+            GpaphicsRender.BeginDraw();
+            GpaphicsRender.Clear();
 
             Scene.Update();
 
-            _imageRender.EndDraw();
+            GpaphicsRender.EndDraw();
         }
     }
 }
