@@ -15,5 +15,6 @@ namespace SharpNEX.Engine
 
         public Vector Position;
         public Quartion Rotation;
+        public Vector Size;
     }
 }
