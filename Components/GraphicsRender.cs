@@ -61,13 +61,13 @@ namespace SharpNEX.Engine.Components
 
             var transformMatrix = _renderTarget.Transform;
 
-            var translationToOrigin = Matrix3x2.Translation(x, y);
-            var rotationMatrix = Matrix3x2.Rotation(angleInRadians);
-            var translationBack = Matrix3x2.Translation(-x, -y);
             var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
+            var translationToOrigin = Matrix3x2.Translation(-x, -y);
+            var rotationMatrix = Matrix3x2.Rotation(angleInRadians);
+            var translationBack = Matrix3x2.Translation(x, y);
             var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(x, y));
 
-            var combinedMatrix = translationToPosition * translationBack * rotationMatrix * scaleMatrix * translationToOrigin * scaleMatrix;
+            var combinedMatrix = translationToPosition * translationToOrigin * rotationMatrix * translationBack * scaleMatrix;
 
             _renderTarget.Transform = combinedMatrix;
 
