@@ -57,11 +57,12 @@ namespace SharpNEX.Engine.Components
 
             float x = position.X + bitmap.Size.Width / 2;
             float y = position.Y + bitmap.Size.Height / 2;
+            float angleInRadians = rotation.Angle * Convert.ToSingle(Math.PI) / 180;
 
             var transformMatrix = _renderTarget.Transform;
 
             var translationToOrigin = Matrix3x2.Translation(x, y);
-            var rotationMatrix = Matrix3x2.Rotation(rotation.Angle);
+            var rotationMatrix = Matrix3x2.Rotation(angleInRadians);
             var translationBack = Matrix3x2.Translation(-x, -y);
             var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
             var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(x, y));
