@@ -47,6 +47,29 @@ namespace SharpNEX.Engine.Components
             }
         }
 
+        public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color, float angle, Vector center)
+        {
+            float angleInRadians = angle * Convert.ToSingle(Math.PI) / 180;
+
+            float cos = Convert.ToSingle(Math.Cos(angleInRadians));
+            float sin = Convert.ToSingle(Math.Sin(angleInRadians));
+
+            float x1 = center.X + (startPoint.X - center.X) * cos - (startPoint.Y - center.Y) * sin;
+            float y1 = center.Y + (startPoint.X - center.X) * sin + (startPoint.Y - center.Y) * cos;
+            float x2 = center.X + (endPoint.X - center.X) * cos - (endPoint.Y - center.Y) * sin;
+            float y2 = center.Y + (endPoint.X - center.X) * sin + (endPoint.Y - center.Y) * cos;
+
+            using (var brush = new SolidColorBrush(_renderTarget, color))
+            {
+                _renderTarget.DrawLine(
+                    new RawVector2(x1, y1),
+                    new RawVector2(x2, y2),
+                    brush,
+                    strokeWidth
+                );
+            }
+        }
+
         public void Render(string imagePath, Vector position, Quartion rotation, Vector size)
         {
             LoadImage(imagePath);
