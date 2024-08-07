@@ -18,7 +18,7 @@ namespace SharpNEX.Engine.Scripts
                 Vector pointStart = Position + Points[i];
                 Vector pointEnd = Position + (i == Points.Count - 1 ? Points[0] : Points[i + 1]);
 
-                Game.GpaphicsRender.DrawLine(pointStart, pointEnd, 1f, new RawColor4(0, 1, 0, 1), Rotation.Angle, Position);
+                Game.GpaphicsRender.DrawLine(pointStart + DeltaPosition, pointEnd + DeltaPosition, 1f, new RawColor4(0, 1, 0, 1), Rotation.Angle, Position + DeltaPosition);
             }
         }
     }
