@@ -70,6 +70,24 @@ namespace SharpNEX.Engine.Components
             }
         }
 
+        public void DrawImage(string imagePath, Vector position, Vector size)
+        {
+            LoadImage(imagePath);
+
+            Bitmap bitmap = _bitmapCache[imagePath];
+
+            var transformMatrix = _renderTarget.Transform;
+
+            var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
+            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y);
+
+            _renderTarget.Transform = scaleMatrix * translationToPosition;
+
+            _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
+
+            _renderTarget.Transform = transformMatrix;
+        }
+
         public void DrawImage(string imagePath, Vector position, Quartion rotation, Vector size)
         {
             LoadImage(imagePath);
@@ -91,24 +109,6 @@ namespace SharpNEX.Engine.Components
             var combinedMatrix = translationToOrigin * scaleMatrix * rotationMatrix * translationBack * translationToPosition;
 
             _renderTarget.Transform = combinedMatrix;
-
-            _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
-
-            _renderTarget.Transform = transformMatrix;
-        }
-
-        public void DrawImage(string imagePath, Vector position, Vector size)
-        {
-            LoadImage(imagePath);
-
-            Bitmap bitmap = _bitmapCache[imagePath];
-
-            var transformMatrix = _renderTarget.Transform;
-
-            var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
-            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y);
-
-            _renderTarget.Transform = scaleMatrix * translationToPosition;
 
             _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
 
