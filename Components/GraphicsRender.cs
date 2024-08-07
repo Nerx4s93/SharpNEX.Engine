@@ -53,8 +53,8 @@ namespace SharpNEX.Engine.Components
 
             Bitmap bitmap = _bitmapCache[imagePath];
 
-            float x = position.X + bitmap.Size.Width / 2;
-            float y = position.Y + bitmap.Size.Height / 2;
+            float x = position.X + bitmap.Size.Width / 2 * size.X;
+            float y = position.Y + bitmap.Size.Height / 2 * size.Y;
             float angleInRadians = rotation.Angle * Convert.ToSingle(Math.PI) / 180;
 
             var transformMatrix = _renderTarget.Transform;
@@ -63,7 +63,7 @@ namespace SharpNEX.Engine.Components
             var translationToOrigin = Matrix3x2.Translation(-x, -y);
             var rotationMatrix = Matrix3x2.Rotation(angleInRadians);
             var translationBack = Matrix3x2.Translation(x, y);
-            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(x, y));
+            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(position.X, position.Y));
 
             var combinedMatrix = translationToPosition * translationToOrigin * rotationMatrix * translationBack * scaleMatrix;
 
@@ -82,11 +82,8 @@ namespace SharpNEX.Engine.Components
 
             var transformMatrix = _renderTarget.Transform;
 
-            float x = position.X + bitmap.Size.Width / 2;
-            float y = position.Y + bitmap.Size.Height / 2;
-
             var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
-            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(x, y));
+            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y, new Vector2(position.X, position.Y));
 
             _renderTarget.Transform = translationToPosition * scaleMatrix;
 
