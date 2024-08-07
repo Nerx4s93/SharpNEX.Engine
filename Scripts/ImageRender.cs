@@ -19,11 +19,11 @@
 
             if (newRotation.Angle == 0)
             {
-                Game.GpaphicsRender.Render(Image, newPosition, Size);
+                Game.GpaphicsRender.DrawImage(Image, newPosition, Size);
             }
             else
             {
-                Game.GpaphicsRender.Render(Image, newPosition, newRotation, Size);
+                Game.GpaphicsRender.DrawImage(Image, newPosition, newRotation, Size);
             }
         }
     }

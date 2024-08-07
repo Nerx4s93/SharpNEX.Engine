@@ -70,7 +70,7 @@ namespace SharpNEX.Engine.Components
             }
         }
 
-        public void Render(string imagePath, Vector position, Quartion rotation, Vector size)
+        public void DrawImage(string imagePath, Vector position, Quartion rotation, Vector size)
         {
             LoadImage(imagePath);
 
@@ -97,7 +97,7 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Transform = transformMatrix;
         }
 
-        public void Render(string imagePath, Vector position, Vector size)
+        public void DrawImage(string imagePath, Vector position, Vector size)
         {
             LoadImage(imagePath);
 
