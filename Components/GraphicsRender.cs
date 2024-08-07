@@ -4,9 +4,7 @@ using System.Windows.Forms;
 
 using SharpDX;
 using SharpDX.Direct2D1;
-using SharpDX.Direct2D1.Effects;
 using SharpDX.Mathematics.Interop;
-using static System.Windows.Forms.AxHost;
 
 namespace SharpNEX.Engine.Components
 {
@@ -28,7 +26,7 @@ namespace SharpNEX.Engine.Components
             var hwndRenderTargetProps = new HwndRenderTargetProperties()
             {
                 Hwnd = hwnd,
-                PixelSize = new SharpDX.Size2(width, height),
+                PixelSize = new Size2(width, height),
                 PresentOptions = PresentOptions.None
             };
 
