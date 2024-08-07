@@ -23,7 +23,7 @@
             }
             else
             {
-                Game.GpaphicsRender.DrawImage(Image, newPosition, newRotation, Size);
+                Game.GpaphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
             }
         }
     }

@@ -88,13 +88,13 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Transform = transformMatrix;
         }
 
-        public void DrawImage(string imagePath, Vector position, Quartion rotation, Vector size)
+        public void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
             LoadImage(imagePath);
 
             Bitmap bitmap = _bitmapCache[imagePath];
 
-            float angleInRadians = rotation.Angle * Convert.ToSingle(Math.PI) / 180;
+            float angleInRadians = angle * Convert.ToSingle(Math.PI) / 180;
 
             float x = bitmap.Size.Width / 2;
             float y = bitmap.Size.Height / 2;
