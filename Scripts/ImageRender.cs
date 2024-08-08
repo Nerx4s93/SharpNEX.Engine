@@ -5,7 +5,7 @@
         public string Image;
 
         public Vector DeltaPosition;
-        public Quartion DeltaRotation;
+        public Rotation DeltaRotation;
 
         public override void Update()
         {
@@ -15,7 +15,7 @@
             }
 
             Vector newPosition = Position + DeltaPosition;
-            Quartion newRotation = Rotation + DeltaRotation;
+            Rotation newRotation = Rotation + DeltaRotation;
 
             if (newRotation.Angle == 0)
             {

@@ -7,7 +7,7 @@ namespace SharpNEX.Engine
         public GameObject GameObject { get; internal set; }
 
         public Vector Position => GameObject.Position;
-        public Quartion Rotation => GameObject.Rotation;
+        public Rotation Rotation => GameObject.Rotation;
         public Vector Size => GameObject.Size;
 
         public bool IsScriptStarted { get; internal set; }

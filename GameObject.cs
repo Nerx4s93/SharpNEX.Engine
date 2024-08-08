@@ -14,7 +14,7 @@ namespace SharpNEX.Engine
         public List<Script> Scripts;
 
         public Vector Position;
-        public Quartion Rotation;
+        public Rotation Rotation;
         public Vector Size = new Vector(1, 1);
     }
 }
