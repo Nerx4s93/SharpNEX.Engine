@@ -22,7 +22,6 @@ namespace SharpNEX.Engine.Utils
                 values = new Angle(angleInRadians, sin, cos);
 
                 angleCache[angleInDegrees] = values;
-                Console.WriteLine(angleInDegrees);
             }
 
             return values;
