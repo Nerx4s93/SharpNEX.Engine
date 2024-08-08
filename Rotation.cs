@@ -1,4 +1,6 @@
-﻿namespace SharpNEX.Engine
+﻿using System;
+
+namespace SharpNEX.Engine
 {
     public struct Rotation
     {
@@ -16,12 +18,15 @@
 
         public static Rotation operator +(Rotation a, Rotation b)
         {
-            return new Rotation(a.Angle + b.Angle);
+            float result = (float)Math.Round(a.Angle + b.Angle, 2);
+            return new Rotation(result);
         }
 
         public static Rotation operator -(Rotation a, Rotation b)
         {
-            return new Rotation(a.Angle - b.Angle);
+            float result = (float)Math.Round(a.Angle - b.Angle, 2);
+            return new Rotation(result);
+        }
         }
     }
 }
