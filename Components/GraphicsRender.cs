@@ -68,15 +68,11 @@ namespace SharpNEX.Engine.Components
         public void DrawImage(string imagePath, Vector position, Vector size)
         {
             LoadImage(imagePath);
-
             Bitmap bitmap = _bitmapCache[imagePath];
 
             var transformMatrix = _renderTarget.Transform;
 
-            var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
-            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y);
-
-            _renderTarget.Transform = scaleMatrix * translationToPosition;
+            _renderTarget.Transform = MatrixBilder.Bild(position, size);
 
             _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
 
@@ -86,22 +82,15 @@ namespace SharpNEX.Engine.Components
         public void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
             LoadImage(imagePath);
-
             Bitmap bitmap = _bitmapCache[imagePath];
 
-            float angleInRadians = TrigonometryCalculator.AngleDegreesToRadians(angle);
+            var transformMatrix = _renderTarget.Transform;
 
             float x = bitmap.Size.Width / 2;
             float y = bitmap.Size.Height / 2;
-            var transformMatrix = _renderTarget.Transform;
+            Vector center = new Vector(x, y);
 
-            var translationToOrigin = Matrix3x2.Translation(-x, -y);
-            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y);
-            var rotationMatrix = Matrix3x2.Rotation(angleInRadians);
-            var translationBack = Matrix3x2.Translation(x, y);
-            var translationToPosition = Matrix3x2.Translation(position.X - x, position.Y - y);
-
-            var combinedMatrix = translationToOrigin * scaleMatrix * rotationMatrix * translationBack * translationToPosition;
+            var combinedMatrix = MatrixBilder.Bild(position, size, center, angle);
 
             _renderTarget.Transform = combinedMatrix;
 
