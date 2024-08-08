@@ -1,4 +1,4 @@
-﻿namespace SharpNEX.Engine.Cache
+﻿namespace SharpNEX.Engine.CacheData
 {
     internal class Angle
     {

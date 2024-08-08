@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using SharpNEX.Engine.Cache;
+using SharpNEX.Engine.CacheData;
 
 namespace SharpNEX.Engine.Utils
 {
