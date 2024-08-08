@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpNEX.Engine
+namespace SharpNEX.Engine.Utils
 {
     internal static class TrigonometryCalculator
     {
