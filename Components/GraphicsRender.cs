@@ -65,19 +65,6 @@ namespace SharpNEX.Engine.Components
             }
         }
 
-        public void DrawImage(string imagePath, Vector position, Vector size)
-        {
-            Bitmap bitmap = LoadImage(imagePath);
-
-            var transformMatrix = _renderTarget.Transform;
-
-            _renderTarget.Transform = MatrixBilder.Bild(position, size);
-
-            _renderTarget.DrawBitmap(bitmap, 1.0f, BitmapInterpolationMode.Linear);
-
-            _renderTarget.Transform = transformMatrix;
-        }
-
         public void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
 

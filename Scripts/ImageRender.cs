@@ -17,14 +17,7 @@
             Vector newPosition = Position + DeltaPosition;
             Rotation newRotation = Rotation + DeltaRotation;
 
-            if (newRotation.Angle == 0)
-            {
-                Game.GpaphicsRender.DrawImage(Image, newPosition, Size);
-            }
-            else
-            {
-                Game.GpaphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
-            }
+            Game.GpaphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
         }
     }
 }

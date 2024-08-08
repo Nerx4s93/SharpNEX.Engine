@@ -4,15 +4,6 @@ namespace SharpNEX.Engine.Utils
 {
     internal static class MatrixBilder
     {
-        public static Matrix3x2 Bild(Vector position, Vector size)
-        {
-            var translationToPosition = Matrix3x2.Translation(position.X, position.Y);
-            var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y);
-
-            var combineMatrix = translationToPosition * scaleMatrix;
-            return combineMatrix;
-        }
-
         public static Matrix3x2 Bild(Vector position, Vector size, Vector center, float angle)
         {
             float angleInRadians = TrigonometryCalculator.AngleDegreesToRadians(angle);
