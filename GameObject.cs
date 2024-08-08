@@ -33,5 +33,21 @@ namespace SharpNEX.Engine
 
             throw new InvalidOperationException($"Скрипт \"{typeof(T).Name}\" не наден");
         }
+
+        public T GetScriptFromBaseType<T>()
+        {
+            foreach (Script script in Scripts)
+            {
+                var baseScriptType = script.GetType().BaseType;
+
+                if (typeof(T) == baseScriptType)
+                {
+                    var result = (T)Convert.ChangeType(script, typeof(T));
+                    return result;
+                }
+            }
+
+            throw new InvalidOperationException($"Скрипт \"{typeof(T).Name}\" не наден");
+        }
     }
 }
