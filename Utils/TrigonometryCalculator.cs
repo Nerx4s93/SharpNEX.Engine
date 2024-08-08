@@ -1,9 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
+
+using SharpNEX.Engine.Cache;
 
 namespace SharpNEX.Engine.Utils
 {
     internal static class TrigonometryCalculator
     {
+        private static readonly Dictionary<float, Angle> angleCache = new Dictionary<float, Angle>();
+
+        private static Angle GetTrigonometricValues(float angleInDegrees)
+        {
+            bool exits = angleCache.TryGetValue(angleInDegrees, out var values);
+
+            if (!exits)
+            {
+                float angleInRadians = AngleDegreesToRadians(angleInDegrees);
+                float sin = Convert.ToSingle(Math.Sin(angleInRadians));
+                float cos = Convert.ToSingle(Math.Cos(angleInRadians));
+
+                values = new Angle(angleInRadians, sin, cos);
+
+                angleCache[angleInDegrees] = values;
+                Console.WriteLine(angleInDegrees);
+            }
+
+            return values;
+        }
+
         public static float AngleDegreesToRadians(float angleInDegrees)
         {
             float angleInRadians = angleInDegrees * Convert.ToSingle(Math.PI) / 180;
@@ -12,13 +36,10 @@ namespace SharpNEX.Engine.Utils
 
         public static Vector RotateVector(Vector vector, float angleInDegrees)
         {
-            float angleInRadians = AngleDegreesToRadians(angleInDegrees);
+            Angle angle = GetTrigonometricValues(angleInDegrees);
 
-            float cos = Convert.ToSingle(Math.Cos(angleInRadians));
-            float sin = Convert.ToSingle(Math.Sin(angleInRadians));
-
-            float x = vector.X * cos - vector.Y * sin;
-            float y = vector.X * sin + vector.Y * cos;
+            float x = vector.X * angle.Cos - vector.Y * angle.Sin;
+            float y = vector.X * angle.Sin + vector.Y * angle.Cos;
 
             Vector result = new Vector(x, y);
             return result;
@@ -26,13 +47,10 @@ namespace SharpNEX.Engine.Utils
 
         public static Vector RotateVector(Vector vector, float angleInDegrees, Vector center)
         {
-            float angleInRadians = AngleDegreesToRadians(angleInDegrees);
+            Angle angle = GetTrigonometricValues(angleInDegrees);
 
-            float cos = Convert.ToSingle(Math.Cos(angleInRadians));
-            float sin = Convert.ToSingle(Math.Sin(angleInRadians));
-
-            float x = center.X + (vector.X - center.X) * cos - (vector.Y - center.Y) * sin;
-            float y = center.Y + (vector.X - center.X) * sin + (vector.Y - center.Y) * cos;
+            float x = center.X + (vector.X - center.X) * angle.Cos - (vector.Y - center.Y) * angle.Sin;
+            float y = center.Y + (vector.X - center.X) * angle.Sin + (vector.Y - center.Y) * angle.Cos;
 
             Vector result = new Vector(x, y);
             return result;
