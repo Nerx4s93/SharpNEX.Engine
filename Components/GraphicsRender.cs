@@ -49,21 +49,14 @@ namespace SharpNEX.Engine.Components
 
         public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color, float angle, Vector center)
         {
-            float angleInRadians = angle * Convert.ToSingle(Math.PI) / 180;
-
-            float cos = Convert.ToSingle(Math.Cos(angleInRadians));
-            float sin = Convert.ToSingle(Math.Sin(angleInRadians));
-
-            float x1 = center.X + (startPoint.X - center.X) * cos - (startPoint.Y - center.Y) * sin;
-            float y1 = center.Y + (startPoint.X - center.X) * sin + (startPoint.Y - center.Y) * cos;
-            float x2 = center.X + (endPoint.X - center.X) * cos - (endPoint.Y - center.Y) * sin;
-            float y2 = center.Y + (endPoint.X - center.X) * sin + (endPoint.Y - center.Y) * cos;
+            Vector newStartPoint = TrigonometryCalculator.RotateVector(startPoint, angle, center);
+            Vector newEndPoint = TrigonometryCalculator.RotateVector(endPoint, angle, center);
 
             using (var brush = new SolidColorBrush(_renderTarget, color))
             {
                 _renderTarget.DrawLine(
-                    new RawVector2(x1, y1),
-                    new RawVector2(x2, y2),
+                    new RawVector2(newStartPoint.X, newStartPoint.Y),
+                    new RawVector2(newEndPoint.X, newEndPoint.Y),
                     brush,
                     strokeWidth
                 );
@@ -94,7 +87,7 @@ namespace SharpNEX.Engine.Components
 
             Bitmap bitmap = _bitmapCache[imagePath];
 
-            float angleInRadians = angle * Convert.ToSingle(Math.PI) / 180;
+            float angleInRadians = TrigonometryCalculator.AngleDegreesToRadians(angle);
 
             float x = bitmap.Size.Width / 2;
             float y = bitmap.Size.Height / 2;

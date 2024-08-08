@@ -61,6 +61,7 @@
     <Compile Include="Scripts\BoxHitbox.cs" />
     <Compile Include="Scripts\HitboxBase.cs" />
     <Compile Include="Scripts\ImageRender.cs" />
+    <Compile Include="TrigonometryCalculator.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,15 +14,7 @@ namespace SharpNEX.Engine.Scripts
 
         protected void Draw()
         {
-            float angleInRadians = Rotation.Angle * Convert.ToSingle(Math.PI) / 180;
-
-            float sin = (float)Math.Sin(angleInRadians);
-            float cos = (float)Math.Cos(angleInRadians);
-
-            float rotatedDeltaX = DeltaPosition.X * cos - DeltaPosition.Y * sin;
-            float rotatedDeltaY = DeltaPosition.X * sin + DeltaPosition.Y * cos;
-
-            Vector rotatedDelta = new Vector(rotatedDeltaX, rotatedDeltaY);
+            Vector rotatedDelta = TrigonometryCalculator.RotateVector(DeltaPosition, Rotation.Angle);
 
             for (int i = 0; i < Points.Count; i++)
             {
