@@ -18,7 +18,7 @@ namespace SharpNEX.Engine
         public Rotation Rotation;
         public Vector Size = new Vector(1, 1);
 
-        public T GetCompontnt<T>()
+        public T GetScript<T>()
         {
             foreach (Script script in Scripts)
             {
