@@ -27,6 +27,17 @@ namespace SharpNEX.Engine
             float result = (float)Math.Round(a.Angle - b.Angle, 2);
             return new Rotation(result);
         }
+
+        public static Rotation operator +(Rotation a, float b)
+        {
+            float result = (float)Math.Round(a.Angle + b, 2);
+            return new Rotation(result);
+        }
+
+        public static Rotation operator -(Rotation a, float b)
+        {
+            float result = (float)Math.Round(a.Angle - b, 2);
+            return new Rotation(result);
         }
     }
 }
