@@ -7,6 +7,7 @@ using SharpNEX.Engine.Utils;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
+using SharpNEX.Engine.Cache;
 
 namespace SharpNEX.Engine.Components
 {
@@ -67,8 +68,7 @@ namespace SharpNEX.Engine.Components
 
         public void DrawImage(string imagePath, Vector position, Vector size)
         {
-            LoadImage(imagePath);
-            Bitmap bitmap = _bitmapCache[imagePath];
+            Bitmap bitmap = LoadImage(imagePath);
 
             var transformMatrix = _renderTarget.Transform;
 
@@ -81,8 +81,8 @@ namespace SharpNEX.Engine.Components
 
         public void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
-            LoadImage(imagePath);
-            Bitmap bitmap = _bitmapCache[imagePath];
+
+            Bitmap bitmap = LoadImage(imagePath);
 
             var transformMatrix = _renderTarget.Transform;
 
@@ -113,22 +113,26 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Dispose();
         }
 
-        private void LoadImage(string imagePath)
+        private Bitmap LoadImage(string imagePath)
         {
-            if (_bitmapCache.ContainsKey(imagePath))
+            bool exits = _bitmapCache.TryGetValue(imagePath, out var values);
+
+            if (!exits)
             {
-                return;
+                var imagingFactory = new SharpDX.WIC.ImagingFactory();
+
+                var bitmapDecoder = new SharpDX.WIC.BitmapDecoder(imagingFactory, imagePath, SharpDX.WIC.DecodeOptions.CacheOnLoad);
+                var frame = bitmapDecoder.GetFrame(0);
+
+                var converter = new SharpDX.WIC.FormatConverter(imagingFactory);
+                converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPBGRA);
+
+                values = Bitmap.FromWicBitmap(_renderTarget, converter);
+
+                _bitmapCache[imagePath] = values;
             }
 
-            var imagingFactory = new SharpDX.WIC.ImagingFactory();
-
-            var bitmapDecoder = new SharpDX.WIC.BitmapDecoder(imagingFactory, imagePath, SharpDX.WIC.DecodeOptions.CacheOnLoad);
-            var frame = bitmapDecoder.GetFrame(0);
-
-            var converter = new SharpDX.WIC.FormatConverter(imagingFactory);
-            converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPBGRA);
-
-            _bitmapCache.Add(imagePath, Bitmap.FromWicBitmap(_renderTarget, converter));
+            return values;
         }
     }
 }
