@@ -11,7 +11,7 @@ namespace SharpNEX.Engine.Scripts
         public float HitboxSize;
         public Vector DeltaPosition;
 
-        protected List<Vector> Points = new List<Vector>();
+        public List<Vector> Points { get; protected set; } = new List<Vector>();
 
         protected void Draw()
         {
