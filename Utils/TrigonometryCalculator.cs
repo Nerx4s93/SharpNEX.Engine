@@ -7,11 +7,11 @@ namespace SharpNEX.Engine.Utils
 {
     internal static class TrigonometryCalculator
     {
-        private static readonly Dictionary<float, Angle> angleCache = new Dictionary<float, Angle>();
+        private static readonly Dictionary<float, Angle> _angleCache = new Dictionary<float, Angle>();
 
         private static Angle GetTrigonometricValues(float angleInDegrees)
         {
-            bool exits = angleCache.TryGetValue(angleInDegrees, out var values);
+            bool exits = _angleCache.TryGetValue(angleInDegrees, out var values);
 
             if (!exits)
             {
@@ -21,7 +21,7 @@ namespace SharpNEX.Engine.Utils
 
                 values = new Angle(angleInRadians, sin, cos);
 
-                angleCache[angleInDegrees] = values;
+                _angleCache[angleInDegrees] = values;
             }
 
             return values;
