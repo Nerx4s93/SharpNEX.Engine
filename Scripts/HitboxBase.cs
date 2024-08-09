@@ -8,7 +8,6 @@ namespace SharpNEX.Engine.Scripts
 {
     public class HitboxBase : Script
     {
-        public float HitboxSize;
         public Vector DeltaPosition;
 
         public List<Vector> Points { get; protected set; } = new List<Vector>();
