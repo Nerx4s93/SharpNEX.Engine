@@ -40,9 +40,9 @@ namespace SharpNEX.Engine
             {
                 var baseScriptType = script.GetType().BaseType;
 
-                if (typeof(T) == baseScriptType)
+                if (typeof(T).IsAssignableFrom(baseScriptType))
                 {
-                    var result = (T)Convert.ChangeType(script, typeof(T));
+                    var result = (T)Convert.ChangeType(script, script.GetType());
                     return result;
                 }
             }
