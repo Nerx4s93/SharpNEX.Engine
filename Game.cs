@@ -19,18 +19,18 @@ namespace SharpNEX.Engine
         public Game(string Name, Scene Scene, Size Size)
         {
             _name = Name;
-            this.Scene = Scene;
+            Game.Scene = Scene;
             _formSize = Size;
         }
 
         public static GraphicsRender GpaphicsRender;
 
-        public Scene Scene { get; internal set; }
+        public static Scene Scene { get; internal set; }
 
         public void Run()
         {
             GpaphicsRender = new GraphicsRender();
-            _formManager = new FormManager(this, GpaphicsRender, _name, _formSize);
+            _formManager = new FormManager(GpaphicsRender, _name, _formSize);
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();

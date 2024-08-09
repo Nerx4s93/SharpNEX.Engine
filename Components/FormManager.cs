@@ -7,15 +7,13 @@ namespace SharpNEX.Engine.Components
 {
     internal class FormManager
     {
-        private readonly Game _game;
         private GraphicsRender _imageRender;
 
         private Form _form;
         private Thread _formThread;
 
-        public FormManager(Game Game, GraphicsRender imageRender, string Title, Size Size)
+        public FormManager(GraphicsRender imageRender, string Title, Size Size)
         {
-            _game = Game;
             _imageRender = imageRender;
 
             Application.EnableVisualStyles();
@@ -53,7 +51,7 @@ namespace SharpNEX.Engine.Components
 
         private void FormMouseDown(object sender, MouseEventArgs e)
         {
-            foreach (var gameObject in _game.Scene.GameObjects)
+            foreach (var gameObject in Game.Scene.GameObjects)
             {
                 foreach (var script in gameObject.Scripts)
                 {
@@ -64,7 +62,7 @@ namespace SharpNEX.Engine.Components
 
         private void FormMouseUp(object sender, MouseEventArgs e)
         {
-            foreach (var gameObject in _game.Scene.GameObjects)
+            foreach (var gameObject in Game.Scene.GameObjects)
             {
                 foreach (var script in gameObject.Scripts)
                 {
@@ -75,7 +73,7 @@ namespace SharpNEX.Engine.Components
 
         private void FormKeyDown(object sender, KeyEventArgs e)
         {
-            foreach (var gameObject in _game.Scene.GameObjects)
+            foreach (var gameObject in Game.Scene.GameObjects)
             {
                 foreach (var script in gameObject.Scripts)
                 {
@@ -86,7 +84,7 @@ namespace SharpNEX.Engine.Components
 
         private void FormKeyUp(object sender, KeyEventArgs e)
         {
-            foreach (var gameObject in _game.Scene.GameObjects)
+            foreach (var gameObject in Game.Scene.GameObjects)
             {
                 foreach (var script in gameObject.Scripts)
                 {
