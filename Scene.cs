@@ -19,12 +19,21 @@ namespace SharpNEX.Engine
             {
                 foreach (var script in gameObject.Scripts)
                 {
-                    if (!script.IsScriptStarted)
+                    if (script.IsScriptStarted)
                     {
-                        script.GameObject = gameObject;
-                        script.Start();
-                        script.IsScriptStarted = true;
+                        continue;
                     }
+
+                    script.GameObject = gameObject;
+                    script.Start();
+                    script.IsScriptStarted = true;
+                }
+            }
+
+            foreach (var gameObject in GameObjects)
+            {
+                foreach (var script in gameObject.Scripts)
+                {
                     script.Update();
                 }
             }
