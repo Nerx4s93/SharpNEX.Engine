@@ -9,7 +9,7 @@ namespace SharpNEX.Engine.Utils
     {
         private static readonly Dictionary<float, Angle> _angleCache = new Dictionary<float, Angle>();
 
-        private static Angle GetTrigonometricValues(float angleInDegrees)
+        public static Angle GetTrigonometricValues(float angleInDegrees)
         {
             bool exits = _angleCache.TryGetValue(angleInDegrees, out var values);
 
