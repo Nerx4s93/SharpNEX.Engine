@@ -62,6 +62,7 @@
     <Compile Include="Scripts\BoxHitbox.cs" />
     <Compile Include="Scripts\HitboxBase.cs" />
     <Compile Include="Scripts\ImageRender.cs" />
+    <Compile Include="Scripts\Rightbody.cs" />
     <Compile Include="Utils\CollisionCalculator.cs" />
     <Compile Include="Utils\MatrixBilder.cs" />
     <Compile Include="Utils\TrigonometryCalculator.cs" />
