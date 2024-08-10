@@ -27,6 +27,8 @@ namespace SharpNEX.Engine
 
         public static Scene Scene { get; internal set; }
 
+        public static float DeltaTime { get; private set; }
+
         public void Run()
         {
             GpaphicsRender = new GraphicsRender();
@@ -58,6 +60,7 @@ namespace SharpNEX.Engine
                 stopwatch.Stop();
 
                 fps.AddTik(Convert.ToInt32(stopwatch.ElapsedMilliseconds));
+                DeltaTime = 60 / Convert.ToSingle(fps.GetFPS());
                 Console.WriteLine("FPS : {0}", fps.GetFPS());
             }
         }
