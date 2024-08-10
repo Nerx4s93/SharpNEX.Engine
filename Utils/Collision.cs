@@ -5,7 +5,7 @@ using SharpNEX.Engine.Scripts;
 
 namespace SharpNEX.Engine.Utils
 {
-    internal static class CollisionCalculator
+    internal static class Collision
     {
         private static bool PointInRectangle(Vector polygonPosition, List<Vector> polygon, Vector point)
         {

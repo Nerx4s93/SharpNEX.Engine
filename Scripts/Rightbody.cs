@@ -35,7 +35,7 @@ namespace SharpNEX.Engine.Scripts
                 {
                     HitboxBase hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
 
-                    bool colision = CollisionCalculator.ColisionHitboxes(_hitboxBase, hitboxBase);
+                    bool colision = Collision.ColisionHitboxes(_hitboxBase, hitboxBase);
                     //TODO: отталкивание
                 }
                 catch (InvalidOperationException invalidOperationException) { }
