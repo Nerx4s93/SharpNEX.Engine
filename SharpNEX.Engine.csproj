@@ -65,7 +65,7 @@
     <Compile Include="Scripts\Rightbody.cs" />
     <Compile Include="Utils\CollisionCalculator.cs" />
     <Compile Include="Utils\MatrixBilder.cs" />
-    <Compile Include="Utils\TrigonometryCalculator.cs" />
+    <Compile Include="Utils\Trigonometry.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,10 @@ namespace SharpNEX.Engine.Scripts
     {
         private HitboxBase _hitboxBase;
 
+        public float Weight;
+        public Vector Force;
+        public float Friction;
+
         public override void Start()
         {
             _hitboxBase = GameObject.GetScriptFromBaseType<HitboxBase>();

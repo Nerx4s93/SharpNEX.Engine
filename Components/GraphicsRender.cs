@@ -51,8 +51,8 @@ namespace SharpNEX.Engine.Components
 
         public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color, float angle, Vector center)
         {
-            Vector newStartPoint = TrigonometryCalculator.RotateVector(startPoint, angle, center);
-            Vector newEndPoint = TrigonometryCalculator.RotateVector(endPoint, angle, center);
+            Vector newStartPoint = Trigonometry.RotateVector(startPoint, angle, center);
+            Vector newEndPoint = Trigonometry.RotateVector(endPoint, angle, center);
 
             using (var brush = new SolidColorBrush(_renderTarget, color))
             {

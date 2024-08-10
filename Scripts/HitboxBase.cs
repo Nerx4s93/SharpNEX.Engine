@@ -14,7 +14,7 @@ namespace SharpNEX.Engine.Scripts
 
         protected void Draw()
         {
-            Vector rotatedDelta = TrigonometryCalculator.RotateVector(DeltaPosition, Rotation.Angle);
+            Vector rotatedDelta = Trigonometry.RotateVector(DeltaPosition, Rotation.Angle);
 
             for (int i = 0; i < Points.Count; i++)
             {

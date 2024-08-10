@@ -5,7 +5,7 @@ using SharpNEX.Engine.CacheData;
 
 namespace SharpNEX.Engine.Utils
 {
-    internal static class TrigonometryCalculator
+    internal static class Trigonometry
     {
         private static readonly Dictionary<float, Angle> _angleCache = new Dictionary<float, Angle>();
 

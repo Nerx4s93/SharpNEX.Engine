@@ -6,7 +6,7 @@ namespace SharpNEX.Engine.Utils
     {
         public static Matrix3x2 Bild(Vector position, Vector size, Vector center, float angle)
         {
-            float angleInRadians = TrigonometryCalculator.AngleDegreesToRadians(angle);
+            float angleInRadians = Trigonometry.AngleDegreesToRadians(angle);
 
             var translationToOrigin = Matrix3x2.Translation(-center.X, -center.Y);
             var scaleMatrix = Matrix3x2.Scaling(size.X, size.Y);
