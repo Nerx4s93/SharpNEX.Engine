@@ -37,5 +37,10 @@
         {
             return new Vector(a.X / b, a.Y / b);
         }
+
+        public override string ToString()
+        {
+            return $"{{ X: {X}; Y: {Y} }}";
+        }
     }
 }
