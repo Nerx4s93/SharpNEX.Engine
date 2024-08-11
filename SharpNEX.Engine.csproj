@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheData\Angle.cs" />
+    <Compile Include="Components\CacheManager.cs" />
     <Compile Include="Components\FormManager.cs" />
     <Compile Include="FPS.cs" />
     <Compile Include="Game.cs" />
