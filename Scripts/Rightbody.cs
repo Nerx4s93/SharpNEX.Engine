@@ -10,11 +10,22 @@ namespace SharpNEX.Engine.Scripts
     public class Rightbody : Script
     {
         private HitboxBase _hitboxBase;
+        private Vector _velocity;
 
         public float Friction = 10000;
         public float Weight = 200;
 
-        public Vector Velocity { get; private set; }
+        public Vector Velocity
+        {
+            get
+            {
+                return _velocity;
+            }
+            private set
+            {
+                _velocity = value;
+            }
+        }
 
         public void AddForce(Vector velocity)
         {
@@ -52,7 +63,7 @@ namespace SharpNEX.Engine.Scripts
 
         private void ForceMove()
         {
-            Vector move = Physics.DistanceTraveled(Friction, Weight, 9.8f, ref Velocity);
+            Vector move = Physics.DistanceTraveled(Friction, Weight, 9.8f, ref _velocity);
             Position += move;
         }
     }
