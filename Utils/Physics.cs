@@ -44,6 +44,7 @@ namespace SharpNEX.Engine.Utils
             return isInside;
         }
 
+        //Нормализованный верктор разницы положения двух объектов
         private static Vector CollisionNormal(Vector positionA, Vector positionB)
         {
             Vector collisionVector = positionA - positionB;
@@ -52,8 +53,10 @@ namespace SharpNEX.Engine.Utils
             return normal;
         }
 
+        //Проверка на столкновение двух хитобоксов
         public static bool ColisionHitboxes(HitboxBase hitbox1, HitboxBase hitbox2)
         {
+            //Проверка нахождения точек из hitbox2 в области hitbox1
             bool pointInRectangle = false;
             for (int i = 0; i < hitbox1.Points.Count; i++)
             {
@@ -70,6 +73,7 @@ namespace SharpNEX.Engine.Utils
                 return false;
             }
 
+            //Проверка нахождения точек из hitbox2 в полигоне hitbox1
             bool pointInPolygon = false;
             for (int i = 0; i < hitbox1.Points.Count; i++)
             {
@@ -84,6 +88,7 @@ namespace SharpNEX.Engine.Utils
             return pointInPolygon;
         }
 
+        //Отдача двух объектов при столкновении
         public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
         {
             Vector normal = CollisionNormal(gameObject.Position, gameObject1.Position);
@@ -96,16 +101,20 @@ namespace SharpNEX.Engine.Utils
             gameObject1.Position += pushVectorB;
         }
 
+        //Движение объекта
         public static Vector DistanceTraveled(float friction, float weight, float g, ref Vector velocity)
         {
-            float force = friction * weight * g;
+            float force = friction * weight * g; //Сила трения
 
+            //Ускорение
             float accelerationX = force * velocity.X * 0.000001f / weight;
             float accelerationY = force * velocity.Y * 0.000001f / weight;
 
+            //Уменьшение скорости
             velocity.X -= accelerationX * Game.DeltaTime;
             velocity.Y -= accelerationY * Game.DeltaTime;
 
+            //Вектор перемещения
             Vector result = new Vector(velocity.X * Game.DeltaTime, velocity.Y * Game.DeltaTime);
 
             return result;
