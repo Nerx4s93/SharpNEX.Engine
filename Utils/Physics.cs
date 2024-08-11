@@ -1,6 +1,4 @@
-﻿using SharpDX;
-
-namespace SharpNEX.Engine.Utils
+﻿namespace SharpNEX.Engine.Utils
 {
     internal static class Physics
     {
