@@ -1,6 +1,6 @@
 ﻿namespace SharpNEX.Engine.CacheData
 {
-    internal class Angle
+    internal struct Angle
     {
         public Angle(float radians, float sin, float cos)
         {
