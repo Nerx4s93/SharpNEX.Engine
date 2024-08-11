@@ -11,9 +11,10 @@ namespace SharpNEX.Engine.Scripts
     {
         private HitboxBase _hitboxBase;
 
-        public float Weight;
-        public Vector Force;
-        public float Friction;
+        public float Friction = 10000;
+        public float Weight = 200;
+
+        public Vector Velocity;
 
         public override void Start()
         {
@@ -22,6 +23,8 @@ namespace SharpNEX.Engine.Scripts
 
         public override void Update()
         {
+            ForceMove();
+
             List<GameObject> gameObjects = Game.Scene.GameObjects;
 
             foreach (GameObject gameObject in gameObjects)
@@ -40,6 +43,12 @@ namespace SharpNEX.Engine.Scripts
                 }
                 catch (InvalidOperationException invalidOperationException) { }
             }
+        }
+
+        private void ForceMove()
+        {
+            Vector move = Physics.DistanceTraveled(Friction, Weight, 9.8f, ref Velocity);
+            Position += move;
         }
     }
 }
