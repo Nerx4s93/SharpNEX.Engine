@@ -7,28 +7,25 @@ using SharpNEX.Engine.Components;
 
 namespace SharpNEX.Engine
 {
-    public class Game
+    public static class Game
     {
-        private readonly string _name;
+        private static string _name;
 
-        private FormManager _formManager;
-        private Size _formSize;
+        private static FormManager _formManager;
+        private static Size _formSize;
 
-        private Thread _gameThread;
-
-        public Game(string Name, Scene Scene, Size Size)
-        {
-            _name = Name;
-            Game.Scene = Scene;
-            _formSize = Size;
-        }
+        private static Thread _gameThread;
 
         public static Scene Scene { get; internal set; }
 
         public static float DeltaTime { get; private set; }
 
-        public void Run()
+        public static void Run(string Name, Scene Scene, Size Size)
         {
+            _name = Name;
+            Game.Scene = Scene;
+            _formSize = Size;
+
             _formManager = new FormManager(_name, _formSize);
 
             _gameThread = new Thread(Handler);
@@ -37,12 +34,12 @@ namespace SharpNEX.Engine
             _formManager.Run();
         }
 
-        public void Stop()
+        public static void Stop()
         {
             _gameThread.Abort();
         }
 
-        private void Handler()
+        private static void Handler()
         {
             while (!_formManager.IsShown) { }
 
@@ -62,7 +59,7 @@ namespace SharpNEX.Engine
             }
         }
 
-        private void BodyHandler()
+        private static void BodyHandler()
         {
             GraphicsRender.BeginDraw();
             GraphicsRender.Clear();
