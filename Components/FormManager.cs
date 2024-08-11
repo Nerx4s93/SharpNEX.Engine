@@ -7,15 +7,11 @@ namespace SharpNEX.Engine.Components
 {
     internal class FormManager
     {
-        private GraphicsRender _imageRender;
-
         private Form _form;
         private Thread _formThread;
 
-        public FormManager(GraphicsRender imageRender, string Title, Size Size)
+        public FormManager(string Title, Size Size)
         {
-            _imageRender = imageRender;
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -45,7 +41,7 @@ namespace SharpNEX.Engine.Components
 
         private void FormShown(object sender, EventArgs e)
         {
-            _imageRender.SetForm(_form);
+            GraphicsRender.SetForm(_form);
             IsShown = true;
         }
 

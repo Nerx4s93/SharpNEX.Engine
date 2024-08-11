@@ -23,16 +23,13 @@ namespace SharpNEX.Engine
             _formSize = Size;
         }
 
-        public static GraphicsRender GpaphicsRender;
-
         public static Scene Scene { get; internal set; }
 
         public static float DeltaTime { get; private set; }
 
         public void Run()
         {
-            GpaphicsRender = new GraphicsRender();
-            _formManager = new FormManager(GpaphicsRender, _name, _formSize);
+            _formManager = new FormManager(_name, _formSize);
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();
@@ -67,12 +64,12 @@ namespace SharpNEX.Engine
 
         private void BodyHandler()
         {
-            GpaphicsRender.BeginDraw();
-            GpaphicsRender.Clear();
+            GraphicsRender.BeginDraw();
+            GraphicsRender.Clear();
 
             Scene.Update();
 
-            GpaphicsRender.EndDraw();
+            GraphicsRender.EndDraw();
         }
     }
 }

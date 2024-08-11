@@ -1,4 +1,6 @@
-﻿namespace SharpNEX.Engine.Scripts
+﻿using SharpNEX.Engine.Components;
+
+namespace SharpNEX.Engine.Scripts
 {
     public class ImageRender : Script
     {
@@ -17,7 +19,7 @@
             Vector newPosition = Position + DeltaPosition;
             Rotation newRotation = Rotation + DeltaRotation;
 
-            Game.GpaphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
+            GraphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
         }
     }
 }

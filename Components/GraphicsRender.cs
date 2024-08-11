@@ -9,7 +9,7 @@ using SharpDX.Mathematics.Interop;
 
 namespace SharpNEX.Engine.Components
 {
-    public class GraphicsRender
+    public static class GraphicsRender
     {
         #region CacheManager
 
@@ -34,7 +34,7 @@ namespace SharpNEX.Engine.Components
 
         private static WindowRenderTarget _renderTarget;
 
-        public void SetForm(Form form)
+        public static void SetForm(Form form)
         {
             IntPtr hwnd = form.Handle;
             int width = form.Width; int height = form.Height;
@@ -53,7 +53,7 @@ namespace SharpNEX.Engine.Components
             _renderTarget = new WindowRenderTarget(factory, renderProps, hwndRenderTargetProps);
         }
 
-        public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color)
+        public static void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color)
         {
             using (var brush = new SolidColorBrush(_renderTarget, color))
             {
@@ -66,7 +66,7 @@ namespace SharpNEX.Engine.Components
             }
         }
 
-        public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color, float angle, Vector center)
+        public static void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color, float angle, Vector center)
         {
             Vector newStartPoint = Trigonometry.RotateVector(startPoint, angle, center);
             Vector newEndPoint = Trigonometry.RotateVector(endPoint, angle, center);
@@ -82,7 +82,7 @@ namespace SharpNEX.Engine.Components
             }
         }
 
-        public void DrawImage(string imagePath, Vector position, Vector size, float angle)
+        public static void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
             Bitmap bitmap = _bitmapCacheManager.GetValue(imagePath);
 
@@ -101,16 +101,16 @@ namespace SharpNEX.Engine.Components
             _renderTarget.Transform = transformMatrix;
         }
 
-        internal void BeginDraw() => _renderTarget.BeginDraw();
+        internal static void BeginDraw() => _renderTarget.BeginDraw();
 
-        internal void EndDraw() => _renderTarget.EndDraw();
+        internal static void EndDraw() => _renderTarget.EndDraw();
 
-        internal void Clear()
+        internal static void Clear()
         {
             _renderTarget.Clear(new RawColor4(1.0f, 1.0f, 1.0f, 1.0f));
         }
 
-        internal void Dispose()
+        internal static void Dispose()
         {
             _renderTarget.Dispose();
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+using SharpNEX.Engine.Components;
 using SharpNEX.Engine.Utils;
 
 using SharpDX.Mathematics.Interop;
@@ -22,7 +23,7 @@ namespace SharpNEX.Engine.Scripts
                 Vector pointEnd = Position + (i == Points.Count - 1 ? Points[0] : Points[i + 1]) + rotatedDelta;
                 Vector center = Position + rotatedDelta;
 
-                Game.GpaphicsRender.DrawLine(pointStart, pointEnd, 1f, new RawColor4(0, 1, 0, 1), Rotation.Angle, center);
+                GraphicsRender.DrawLine(pointStart, pointEnd, 1f, new RawColor4(0, 1, 0, 1), Rotation.Angle, center);
             }
         }
     }
