@@ -14,7 +14,12 @@ namespace SharpNEX.Engine.Scripts
         public float Friction = 10000;
         public float Weight = 200;
 
-        public Vector Velocity;
+        public Vector Velocity { get; private set; }
+
+        public void AddForce(Vector velocity)
+        {
+            Velocity += velocity;
+        }
 
         public override void Start()
         {
