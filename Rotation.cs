@@ -16,6 +16,8 @@ namespace SharpNEX.Engine
 
         public float Angle;
 
+        #region Операторы
+
         public static Rotation operator +(Rotation a, Rotation b)
         {
             float result = (float)Math.Round(a.Angle + b.Angle, 3);
@@ -39,5 +41,7 @@ namespace SharpNEX.Engine
             float result = (float)Math.Round(a.Angle - b, 3);
             return new Rotation(result);
         }
+
+        #endregion
     }
 }
