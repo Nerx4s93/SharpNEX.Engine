@@ -1,6 +1,4 @@
-﻿using SharpNEX.Engine.Components;
-
-namespace SharpNEX.Engine.Scripts
+﻿namespace SharpNEX.Engine.Scripts
 {
     public class ImageRender : Script
     {

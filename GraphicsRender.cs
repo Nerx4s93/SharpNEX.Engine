@@ -2,12 +2,13 @@
 using System.Windows.Forms;
 
 using SharpNEX.Engine.Utils;
+using SharpNEX.Engine.Components;
 
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
 
-namespace SharpNEX.Engine.Components
+namespace SharpNEX.Engine
 {
     public static class GraphicsRender
     {

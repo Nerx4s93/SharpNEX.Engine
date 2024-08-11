@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using SharpNEX.Engine.Components;
 using SharpNEX.Engine.Utils;
 
 using SharpDX.Mathematics.Interop;
