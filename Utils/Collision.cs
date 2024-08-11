@@ -44,6 +44,14 @@ namespace SharpNEX.Engine.Utils
             return isInside;
         }
 
+        private static Vector CollisionNormal(Vector positionA, Vector positionB)
+        {
+            Vector collisionVector = positionA - positionB;
+            Vector normal = collisionVector.Normalize();
+
+            return normal;
+        }
+
         public static bool ColisionHitboxes(HitboxBase hitbox1, HitboxBase hitbox2)
         {
             bool pointInRectangle = false;
@@ -74,6 +82,18 @@ namespace SharpNEX.Engine.Utils
             }
 
             return pointInPolygon;
+        }
+
+        public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
+        {
+            Vector normal = CollisionNormal(gameObject.Position, gameObject1.Position);
+            float pushStrength = 3f;
+
+            Vector pushVectorA = normal * pushStrength;
+            Vector pushVectorB = -normal * pushStrength;
+
+            gameObject.Position += pushVectorA;
+            gameObject1.Position += pushVectorB;
         }
     }
 }
