@@ -31,11 +31,6 @@
             }
         }
 
-        public override void Update()
-        {
-            Draw();
-        }
-
         private void UpdateHitbox()
         {
             Points.Clear();
