@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 using SharpNEX.Engine.Utils;
@@ -12,9 +11,28 @@ namespace SharpNEX.Engine.Components
 {
     public class GraphicsRender
     {
-        private WindowRenderTarget _renderTarget;
+        #region CacheManager
 
-        private Dictionary<string, Bitmap> _bitmapCache;
+        private static CacheManager<string, Bitmap> _bitmapCacheManager = new CacheManager<string, Bitmap>(LoadImage);
+
+        private static Bitmap LoadImage(string imagePath)
+        {
+            var imagingFactory = new SharpDX.WIC.ImagingFactory();
+
+            var bitmapDecoder = new SharpDX.WIC.BitmapDecoder(imagingFactory, imagePath, SharpDX.WIC.DecodeOptions.CacheOnLoad);
+            var frame = bitmapDecoder.GetFrame(0);
+
+            var converter = new SharpDX.WIC.FormatConverter(imagingFactory);
+            converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPBGRA);
+
+            var result = Bitmap.FromWicBitmap(_renderTarget, converter);
+
+            return result;
+        }
+
+        #endregion
+
+        private static WindowRenderTarget _renderTarget;
 
         public void SetForm(Form form)
         {
@@ -33,7 +51,6 @@ namespace SharpNEX.Engine.Components
             };
 
             _renderTarget = new WindowRenderTarget(factory, renderProps, hwndRenderTargetProps);
-            _bitmapCache = new Dictionary<string, Bitmap>();
         }
 
         public void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color)
@@ -67,7 +84,7 @@ namespace SharpNEX.Engine.Components
 
         public void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
-            Bitmap bitmap = LoadImage(imagePath);
+            Bitmap bitmap = _bitmapCacheManager.GetValue(imagePath);
 
             var transformMatrix = _renderTarget.Transform;
 
@@ -96,28 +113,6 @@ namespace SharpNEX.Engine.Components
         internal void Dispose()
         {
             _renderTarget.Dispose();
-        }
-
-        private Bitmap LoadImage(string imagePath)
-        {
-            bool exits = _bitmapCache.TryGetValue(imagePath, out var values);
-
-            if (!exits)
-            {
-                var imagingFactory = new SharpDX.WIC.ImagingFactory();
-
-                var bitmapDecoder = new SharpDX.WIC.BitmapDecoder(imagingFactory, imagePath, SharpDX.WIC.DecodeOptions.CacheOnLoad);
-                var frame = bitmapDecoder.GetFrame(0);
-
-                var converter = new SharpDX.WIC.FormatConverter(imagingFactory);
-                converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPBGRA);
-
-                values = Bitmap.FromWicBitmap(_renderTarget, converter);
-
-                _bitmapCache[imagePath] = values;
-            }
-
-            return values;
         }
     }
 }
