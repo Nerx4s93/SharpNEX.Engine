@@ -8,6 +8,7 @@ namespace SharpNEX.Engine.Scripts
 {
     public class HitboxBase : Script
     {
+        public bool IsTrigger;
         public Vector DeltaPosition;
 
         public List<Vector> Points { get; protected set; } = new List<Vector>();

@@ -56,7 +56,7 @@ namespace SharpNEX.Engine.Scripts
 
                     bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
 
-                    if (colision)
+                    if (colision && !hitboxBase.IsTrigger && !_hitboxBase.IsTrigger)
                     {
                         Physics.RepellingObjects(GameObject, gameObject);
                     }
