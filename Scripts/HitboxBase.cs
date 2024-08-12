@@ -13,6 +13,8 @@ namespace SharpNEX.Engine.Scripts
 
         public List<Vector> Points { get; protected set; } = new List<Vector>();
 
+        internal List<GameObject> GameObjectsTriggerEnter = new List<GameObject>();
+
         protected void Draw()
         {
             Vector rotatedDelta = Trigonometry.RotateVector(DeltaPosition, Rotation.Angle);

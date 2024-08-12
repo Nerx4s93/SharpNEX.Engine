@@ -53,12 +53,47 @@ namespace SharpNEX.Engine.Scripts
                 try
                 {
                     HitboxBase hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
-
                     bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
 
-                    if (colision && !hitboxBase.IsTrigger && !_hitboxBase.IsTrigger)
+                    if (colision)
                     {
-                        Physics.RepellingObjects(GameObject, gameObject);
+                        if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
+                        {
+                            bool gameObjecctExists = hitboxBase.GameObjectsTriggerEnter.Exists(x => x == GameObject);
+
+                            if (!gameObjecctExists)
+                            {
+                                hitboxBase.GameObjectsTriggerEnter.Add(GameObject);
+
+                                foreach (Script script in GameObject.Scripts)
+                                {
+                                    script.OnTriggerEnter(gameObject);
+                                }
+                            }
+                        }
+                        else if (!_hitboxBase.IsTrigger)
+                        {
+                            Physics.RepellingObjects(GameObject, gameObject);
+
+                            foreach (Script script in GameObject.Scripts)
+                            {
+                                script.OnCollision(gameObject);
+                            }
+                        }
+                    }
+                    else if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
+                    {
+                        bool gameObjecctExists = hitboxBase.GameObjectsTriggerEnter.Exists(x => x == GameObject);
+
+                        if (gameObjecctExists)
+                        {
+                            hitboxBase.GameObjectsTriggerEnter.Remove(GameObject);
+
+                            foreach (Script script in GameObject.Scripts)
+                            {
+                                script.OnTriggerLeave(gameObject);
+                            }
+                        }
                     }
                 }
                 catch (InvalidOperationException invalidOperationException) { }
