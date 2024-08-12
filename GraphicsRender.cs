@@ -37,7 +37,7 @@ namespace SharpNEX.Engine
 
         public static void SetForm(Form form)
         {
-            IntPtr hwnd = form.Handle;
+            var hwnd = form.Handle;
             int width = form.Width; int height = form.Height;
 
             var factory = new Factory();
@@ -69,8 +69,8 @@ namespace SharpNEX.Engine
 
         public static void DrawLine(Vector startPoint, Vector endPoint, float strokeWidth, RawColor4 color, float angle, Vector center)
         {
-            Vector newStartPoint = Trigonometry.RotateVector(startPoint, angle, center);
-            Vector newEndPoint = Trigonometry.RotateVector(endPoint, angle, center);
+            var newStartPoint = Trigonometry.RotateVector(startPoint, angle, center);
+            var newEndPoint = Trigonometry.RotateVector(endPoint, angle, center);
 
             using (var brush = new SolidColorBrush(_renderTarget, color))
             {
@@ -85,13 +85,13 @@ namespace SharpNEX.Engine
 
         public static void DrawImage(string imagePath, Vector position, Vector size, float angle)
         {
-            Bitmap bitmap = _bitmapCacheManager.GetValue(imagePath);
+            var bitmap = _bitmapCacheManager.GetValue(imagePath);
 
             var transformMatrix = _renderTarget.Transform;
 
             float x = bitmap.Size.Width / 2;
             float y = bitmap.Size.Height / 2;
-            Vector center = new Vector(x, y);
+            var center = new Vector(x, y);
 
             var combinedMatrix = MatrixBilder.Bild(position, size, center, angle);
 

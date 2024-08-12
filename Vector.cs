@@ -58,7 +58,7 @@ namespace SharpNEX.Engine
         {
             float length = GetLenght();
 
-            Vector result = new Vector(X / length, Y / length);
+            var result = new Vector(X / length, Y / length);
             return result;
         }
     }

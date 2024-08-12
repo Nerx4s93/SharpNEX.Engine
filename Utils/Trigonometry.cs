@@ -31,23 +31,23 @@ namespace SharpNEX.Engine.Utils
 
         public static Vector RotateVector(Vector vector, float angleInDegrees)
         {
-            Angle angle = _angleCacheManager.GetValue(angleInDegrees);
+            var angle = _angleCacheManager.GetValue(angleInDegrees);
 
             float x = vector.X * angle.Cos - vector.Y * angle.Sin;
             float y = vector.X * angle.Sin + vector.Y * angle.Cos;
 
-            Vector result = new Vector(x, y);
+            var result = new Vector(x, y);
             return result;
         }
 
         public static Vector RotateVector(Vector vector, float angleInDegrees, Vector center)
         {
-            Angle angle = _angleCacheManager.GetValue(angleInDegrees);
+            var angle = _angleCacheManager.GetValue(angleInDegrees);
 
             float x = center.X + (vector.X - center.X) * angle.Cos - (vector.Y - center.Y) * angle.Sin;
             float y = center.Y + (vector.X - center.X) * angle.Sin + (vector.Y - center.Y) * angle.Cos;
 
-            Vector result = new Vector(x, y);
+            var result = new Vector(x, y);
             return result;
         }
     }

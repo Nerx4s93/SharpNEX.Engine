@@ -14,8 +14,8 @@
                 return;
             }
 
-            Vector newPosition = Position + DeltaPosition;
-            Rotation newRotation = Rotation + DeltaRotation;
+            var newPosition = Position + DeltaPosition;
+            var newRotation = Rotation + DeltaRotation;
 
             GraphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
         }

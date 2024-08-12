@@ -43,7 +43,7 @@ namespace SharpNEX.Engine
         {
             while (!_formManager.IsShown) { }
 
-            FPS fps = new FPS();
+            var fps = new FPS();
 
             while (true)
             {

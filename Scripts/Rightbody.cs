@@ -41,7 +41,7 @@ namespace SharpNEX.Engine.Scripts
         {
             ForceMove();
 
-            List<GameObject> gameObjects = Game.Scene.GameObjects;
+            var gameObjects = Game.Scene.GameObjects;
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -52,7 +52,7 @@ namespace SharpNEX.Engine.Scripts
 
                 try
                 {
-                    HitboxBase hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
+                    var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
                     bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
 
                     if (colision)
@@ -102,7 +102,7 @@ namespace SharpNEX.Engine.Scripts
 
         private void ForceMove()
         {
-            Vector move = Physics.DistanceTraveled(Friction, Weight, 9.8f, ref _velocity);
+            var move = Physics.DistanceTraveled(Friction, Weight, 9.8f, ref _velocity);
             Position += move;
         }
     }

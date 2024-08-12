@@ -17,13 +17,13 @@ namespace SharpNEX.Engine.Scripts
 
         protected void Draw()
         {
-            Vector rotatedDelta = Trigonometry.RotateVector(DeltaPosition, Rotation.Angle);
+            var rotatedDelta = Trigonometry.RotateVector(DeltaPosition, Rotation.Angle);
 
             for (int i = 0; i < Points.Count; i++)
             {
-                Vector pointStart = Position + Points[i] + rotatedDelta;
-                Vector pointEnd = Position + (i == Points.Count - 1 ? Points[0] : Points[i + 1]) + rotatedDelta;
-                Vector center = Position + rotatedDelta;
+                var pointStart = Position + Points[i] + rotatedDelta;
+                var pointEnd = Position + (i == Points.Count - 1 ? Points[0] : Points[i + 1]) + rotatedDelta;
+                var center = Position + rotatedDelta;
 
                 GraphicsRender.DrawLine(pointStart, pointEnd, 1f, new RawColor4(0, 1, 0, 1), Rotation.Angle, center);
             }
