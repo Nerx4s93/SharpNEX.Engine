@@ -51,5 +51,9 @@ namespace SharpNEX.Engine
         public virtual void OnMouseUp() { }
         public virtual void OnKeyDown(KeyEventArgs e) { }
         public virtual void OnKeyUp(KeyEventArgs e) { }
+
+        public virtual void OnCollision(GameObject gameObject) { }
+        public virtual void OnTriggerEnter(GameObject gameObject) { }
+        public virtual void OnTriggerLeave(GameObject gameObject) { }
     }
 }
