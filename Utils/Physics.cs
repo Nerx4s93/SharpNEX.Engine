@@ -53,10 +53,9 @@ namespace SharpNEX.Engine.Utils
             return normal;
         }
 
-        //Проверка на столкновение двух хитобоксов
-        public static bool ColisionHitboxes(HitboxBase hitbox1, HitboxBase hitbox2)
+        //Проверка нахождения точек из hitbox2 в области hitbox1
+        public static bool AreasHitboxesIntersect(HitboxBase hitbox1, HitboxBase hitbox2)
         {
-            //Проверка нахождения точек из hitbox2 в области hitbox1
             bool pointInRectangle = false;
             for (int i = 0; i < hitbox1.Points.Count; i++)
             {
@@ -68,12 +67,12 @@ namespace SharpNEX.Engine.Utils
                 }
             }
 
-            if (!pointInRectangle)
-            {
-                return false;
-            }
+            return pointInRectangle;
+        }
 
-            //Проверка нахождения точек из hitbox2 в полигоне hitbox1
+        //Проверка нахождения точек из hitbox2 в полигоне hitbox1
+        public static bool HitboxesIntersect(HitboxBase hitbox1, HitboxBase hitbox2)
+        {
             bool pointInPolygon = false;
             for (int i = 0; i < hitbox1.Points.Count; i++)
             {
@@ -84,6 +83,20 @@ namespace SharpNEX.Engine.Utils
                     break;
                 }
             }
+
+            return pointInPolygon;
+        }
+
+        //Проверка на столкновение двух хитобоксов
+        public static bool ColisionHitboxes(HitboxBase hitbox1, HitboxBase hitbox2)
+        {
+            bool pointInRectangle = AreasHitboxesIntersect(hitbox1, hitbox2);
+            if (!pointInRectangle)
+            {
+                return false;
+            }
+
+            bool pointInPolygon = HitboxesIntersect(hitbox1, hitbox2);
 
             return pointInPolygon;
         }
