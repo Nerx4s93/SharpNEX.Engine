@@ -47,8 +47,8 @@ namespace SharpNEX.Engine.Utils
         //Нормализованный верктор разницы положения двух объектов
         public static Vector CollisionNormal(Vector positionA, Vector positionB)
         {
-            Vector collisionVector = positionA - positionB;
-            Vector normal = collisionVector.Normalize();
+            var collisionVector = positionA - positionB;
+            var normal = collisionVector.Normalize();
 
             return normal;
         }
@@ -91,11 +91,11 @@ namespace SharpNEX.Engine.Utils
         //Отдача двух объектов при столкновении
         public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
         {
-            Vector normal = CollisionNormal(gameObject.Position, gameObject1.Position);
+            var normal = CollisionNormal(gameObject.Position, gameObject1.Position);
             float pushStrength = 3f;
 
-            Vector pushVectorA = normal * pushStrength;
-            Vector pushVectorB = -normal * pushStrength;
+            var pushVectorA = normal * pushStrength;
+            var pushVectorB = -normal * pushStrength;
 
             gameObject.Position += pushVectorA;
             gameObject1.Position += pushVectorB;
@@ -115,7 +115,7 @@ namespace SharpNEX.Engine.Utils
             velocity.Y -= accelerationY * Game.DeltaTime;
 
             //Вектор перемещения
-            Vector result = new Vector(velocity.X * Game.DeltaTime, velocity.Y * Game.DeltaTime);
+            var result = new Vector(velocity.X * Game.DeltaTime, velocity.Y * Game.DeltaTime);
 
             return result;
         }
