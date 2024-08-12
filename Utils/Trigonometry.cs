@@ -23,12 +23,14 @@ namespace SharpNEX.Engine.Utils
 
         #endregion
 
+        // Перевод угла из градусов в радиаты
         public static float AngleDegreesToRadians(float angleInDegrees)
         {
             float angleInRadians = angleInDegrees * Convert.ToSingle(Math.PI) / 180;
             return angleInRadians;
         }
 
+        // Повернуть вектор
         public static Vector RotateVector(Vector vector, float angleInDegrees)
         {
             var angle = _angleCacheManager.GetValue(angleInDegrees);
@@ -40,6 +42,7 @@ namespace SharpNEX.Engine.Utils
             return result;
         }
 
+        // Повернуть вектор вокруг заданной точки
         public static Vector RotateVector(Vector vector, float angleInDegrees, Vector center)
         {
             var angle = _angleCacheManager.GetValue(angleInDegrees);
