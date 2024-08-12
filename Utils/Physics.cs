@@ -44,7 +44,7 @@ namespace SharpNEX.Engine.Utils
             return isInside;
         }
 
-        //Нормализованный верктор разницы положения двух объектов
+        // Нормализованный верктор разницы положения двух объектов
         private static Vector CollisionNormal(Vector positionA, Vector positionB)
         {
             var collisionVector = positionA - positionB;
@@ -53,7 +53,7 @@ namespace SharpNEX.Engine.Utils
             return normal;
         }
 
-        //Проверка нахождения точек из hitbox2 в области hitbox1
+        // Проверка нахождения точек из hitbox2 в области hitbox1
         public static bool AreasHitboxesIntersect(HitboxBase hitbox1, HitboxBase hitbox2)
         {
             bool pointInRectangle = false;
@@ -70,7 +70,7 @@ namespace SharpNEX.Engine.Utils
             return pointInRectangle;
         }
 
-        //Проверка нахождения точек из hitbox2 в полигоне hitbox1
+        // Проверка нахождения точек из hitbox2 в полигоне hitbox1
         public static bool HitboxesIntersect(HitboxBase hitbox1, HitboxBase hitbox2)
         {
             bool pointInPolygon = false;
@@ -87,7 +87,7 @@ namespace SharpNEX.Engine.Utils
             return pointInPolygon;
         }
 
-        //Проверка на столкновение двух хитобоксов
+        // Проверка на столкновение двух хитобоксов
         public static bool ColisionHitboxes(HitboxBase hitbox1, HitboxBase hitbox2)
         {
             bool pointInRectangle = AreasHitboxesIntersect(hitbox1, hitbox2);
@@ -101,7 +101,7 @@ namespace SharpNEX.Engine.Utils
             return pointInPolygon;
         }
 
-        //Отдача двух объектов при столкновении
+        // Отдача двух объектов при столкновении
         public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
         {
             var normal = CollisionNormal(gameObject.Position, gameObject1.Position);
@@ -114,20 +114,20 @@ namespace SharpNEX.Engine.Utils
             gameObject1.Position += pushVectorB;
         }
 
-        //Движение объекта
+        // Движение объекта
         public static Vector DistanceTraveled(float friction, float weight, float g, ref Vector velocity)
         {
-            float force = friction * weight * g; //Сила трения
+            float force = friction * weight * g; // Сила трения
 
-            //Ускорение
+            // Ускорение
             float accelerationX = force * velocity.X * 0.000001f / weight;
             float accelerationY = force * velocity.Y * 0.000001f / weight;
 
-            //Уменьшение скорости
+            // Уменьшение скорости
             velocity.X -= accelerationX * Game.DeltaTime;
             velocity.Y -= accelerationY * Game.DeltaTime;
 
-            //Вектор перемещения
+            // Вектор перемещения
             var result = new Vector(velocity.X * Game.DeltaTime, velocity.Y * Game.DeltaTime);
 
             return result;
