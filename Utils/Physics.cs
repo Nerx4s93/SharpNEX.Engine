@@ -7,7 +7,7 @@ namespace SharpNEX.Engine.Utils
 {
     internal static class Physics
     {
-        private static bool PointInRectangle(Vector polygonPosition, List<Vector> polygon, Vector point)
+        public static bool PointInRectangle(Vector polygonPosition, List<Vector> polygon, Vector point)
         {
             float minX = polygonPosition.X + polygon.Min(x => x.X);
             float minY = polygonPosition.Y + polygon.Min(x => x.Y);
@@ -22,7 +22,7 @@ namespace SharpNEX.Engine.Utils
             return false;
         }
 
-        private static bool PointInPolygon(Vector polygonPosition, List<Vector> polygon, Vector point)
+        public static bool PointInPolygon(Vector polygonPosition, List<Vector> polygon, Vector point)
         {
             int n = polygon.Count;
             bool isInside = false;
@@ -45,7 +45,7 @@ namespace SharpNEX.Engine.Utils
         }
 
         //Нормализованный верктор разницы положения двух объектов
-        private static Vector CollisionNormal(Vector positionA, Vector positionB)
+        public static Vector CollisionNormal(Vector positionA, Vector positionB)
         {
             Vector collisionVector = positionA - positionB;
             Vector normal = collisionVector.Normalize();
