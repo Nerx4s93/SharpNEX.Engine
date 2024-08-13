@@ -53,6 +53,7 @@ namespace SharpNEX.Engine.Scripts
                 {
                     var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
                     bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
+                    var scripts = GameObject.GetScripts();
 
                     if (colision)
                     {
@@ -64,7 +65,7 @@ namespace SharpNEX.Engine.Scripts
                             {
                                 hitboxBase.GameObjectsTriggerEnter.Add(GameObject);
 
-                                foreach (Script script in GameObject.Scripts)
+                                foreach (Script script in scripts)
                                 {
                                     script.OnTriggerEnter(gameObject);
                                 }
@@ -74,7 +75,7 @@ namespace SharpNEX.Engine.Scripts
                         {
                             Physics.RepellingObjects(GameObject, gameObject);
 
-                            foreach (Script script in GameObject.Scripts)
+                            foreach (Script script in scripts)
                             {
                                 script.OnCollision(gameObject);
                             }
@@ -99,7 +100,7 @@ namespace SharpNEX.Engine.Scripts
                         {
                             hitboxBase.GameObjectsTriggerEnter.Remove(GameObject);
 
-                            foreach (Script script in GameObject.Scripts)
+                            foreach (Script script in scripts)
                             {
                                 script.OnTriggerLeave(gameObject);
                             }

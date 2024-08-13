@@ -49,7 +49,9 @@ namespace SharpNEX.Engine.Components
         {
             foreach (var gameObject in Game.Scene.GameObjects)
             {
-                foreach (var script in gameObject.Scripts)
+                var scripts = gameObject.GetScripts();
+
+                foreach (var script in scripts)
                 {
                     script.OnMouseDown();
                 }
@@ -60,7 +62,9 @@ namespace SharpNEX.Engine.Components
         {
             foreach (var gameObject in Game.Scene.GameObjects)
             {
-                foreach (var script in gameObject.Scripts)
+                var scripts = gameObject.GetScripts();
+
+                foreach (var script in scripts)
                 {
                     script.OnMouseUp();
                 }
@@ -71,7 +75,9 @@ namespace SharpNEX.Engine.Components
         {
             foreach (var gameObject in Game.Scene.GameObjects)
             {
-                foreach (var script in gameObject.Scripts)
+                var scripts = gameObject.GetScripts();
+
+                foreach (var script in scripts)
                 {
                     script.OnKeyDown(e);
                 }
@@ -82,7 +88,9 @@ namespace SharpNEX.Engine.Components
         {
             foreach (var gameObject in Game.Scene.GameObjects)
             {
-                foreach (var script in gameObject.Scripts)
+                var scripts = gameObject.GetScripts();
+
+                foreach (var script in scripts)
                 {
                     script.OnKeyUp(e);
                 }

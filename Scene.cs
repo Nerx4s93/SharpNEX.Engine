@@ -17,7 +17,9 @@ namespace SharpNEX.Engine
         {
             foreach (var gameObject in GameObjects)
             {
-                foreach (var script in gameObject.Scripts)
+                var scripts = gameObject.GetScripts();
+
+                foreach (var script in scripts)
                 {
                     if (script.IsScriptStarted)
                     {
@@ -32,7 +34,9 @@ namespace SharpNEX.Engine
 
             foreach (var gameObject in GameObjects)
             {
-                foreach (var script in gameObject.Scripts)
+                var scripts = gameObject.GetScripts();
+
+                foreach (var script in scripts)
                 {
                     script.Update();
                 }
