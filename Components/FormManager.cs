@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace SharpNEX.Engine.Components
@@ -8,7 +7,6 @@ namespace SharpNEX.Engine.Components
     internal class FormManager
     {
         private Form _form;
-        private Thread _formThread;
 
         public FormManager(string Title, Size Size)
         {
