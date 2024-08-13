@@ -103,6 +103,12 @@ namespace SharpNEX.Engine
             Childs.Remove(gameObject);
         }
 
+        public void SetParent(GameObject gameObject)
+        {
+            Parent?.RemoveChild(this);
+            Parent = gameObject;
+        }
+
         public T GetScript<T>()
         {
             foreach (Script script in Scripts)
