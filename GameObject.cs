@@ -6,6 +6,7 @@ namespace SharpNEX.Engine
 {
     public class GameObject
     {
+        private readonly List<GameObject> Childs = new List<GameObject>();
         private Vector _position;
         private Rotation _rotation;
         private Vector _size;
@@ -18,6 +19,8 @@ namespace SharpNEX.Engine
 
         public string Name;
         public List<Script> Scripts;
+
+        public GameObject Parent { get; private set; }
 
         public Vector Position
         {
@@ -37,6 +40,7 @@ namespace SharpNEX.Engine
                 }
             }
         }
+
         public Rotation Rotation
         {
             get
@@ -55,6 +59,7 @@ namespace SharpNEX.Engine
                 }
             }
         }
+
         public Vector Size
         {
             get
@@ -73,9 +78,6 @@ namespace SharpNEX.Engine
                 }
             }
         }
-
-        public GameObject Parent { get; private set; }
-        private readonly List<GameObject> Childs = new List<GameObject>();
 
         public ReadOnlyCollection<GameObject> GetChilds()
         {
