@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SharpNEX.Engine
 {
     public class GameObject
     {
+        private Vector _position;
+        private Rotation _rotation;
+        private Vector _size;
+
         public GameObject(string Name, List<Script> Scripts)
         {
             this.Name = Name;
@@ -14,9 +19,87 @@ namespace SharpNEX.Engine
         public string Name;
         public List<Script> Scripts;
 
-        public Vector Position;
-        public Rotation Rotation;
-        public Vector Size = new Vector(1, 1);
+        public Vector Position
+        {
+            get
+            {
+                return _position;
+            }
+            set
+            {
+                var delta = value - _position;
+
+                _position = value;
+                
+                foreach (var gameObjcet in Childs)
+                {
+                    gameObjcet.Position += delta;
+                }
+            }
+        }
+        public Rotation Rotation
+        {
+            get
+            {
+                return _rotation;
+            }
+            set
+            {
+                var delta = value - _rotation;
+
+                _rotation = value;
+
+                foreach (var gameObjcet in Childs)
+                {
+                    gameObjcet.Rotation = _rotation;
+                }
+            }
+        }
+        public Vector Size
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                var delta = value - _size;
+
+                _size = value;
+
+                foreach (var gameObjcet in Childs)
+                {
+                    gameObjcet.Size += delta;
+                }
+            }
+        }
+
+        public GameObject Parent { get; private set; }
+        private readonly List<GameObject> Childs = new List<GameObject>();
+
+        public ReadOnlyCollection<GameObject> GetChilds()
+        {
+            return Childs.AsReadOnly();
+        }
+
+        public void AddChild(GameObject gameObject)
+        {
+            if (gameObject.Parent != this)
+            {
+                gameObject.Parent?.RemoveChild(gameObject);
+                gameObject.Parent = this;
+            }
+            Childs.Add(gameObject);
+        }
+
+        public void RemoveChild(GameObject gameObject)
+        {
+            if (gameObject.Parent == this)
+            {
+                gameObject.Parent = null;
+            }
+            Childs.Remove(gameObject);
+        }
 
         public T GetScript<T>()
         {
