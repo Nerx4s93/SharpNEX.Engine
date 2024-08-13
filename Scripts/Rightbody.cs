@@ -78,6 +78,17 @@ namespace SharpNEX.Engine.Scripts
                             {
                                 script.OnCollision(gameObject);
                             }
+
+                            try
+                            {
+                                var righitbody = gameObject.GetScript<Rightbody>();
+
+                                var newVelocity = Velocity * Weight / (Weight + righitbody.Weight);
+
+                                righitbody.Velocity = newVelocity;
+                                Velocity = newVelocity;
+                            }
+                            catch (InvalidOperationException invalidOperationException) { }
                         }
                     }
                     else if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
