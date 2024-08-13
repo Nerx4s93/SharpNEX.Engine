@@ -6,6 +6,17 @@ namespace SharpNEX.Engine
     {
         public GameObject GameObject { get; internal set; }
 
+        public string Name
+        {
+            get => GameObject.Name;
+            set => GameObject.Name = value;
+        }
+
+        public GameObject Parent
+        {
+            get => GameObject.Parent;
+        }
+
         public Vector Position
         {
             get => GameObject.Position;
