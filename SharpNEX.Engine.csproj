@@ -61,6 +61,7 @@
     <Compile Include="Scene.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Scripts\BoxHitbox.cs" />
+    <Compile Include="Scripts\Camera.cs" />
     <Compile Include="Scripts\HitboxBase.cs" />
     <Compile Include="Scripts\ImageRender.cs" />
     <Compile Include="Scripts\Rightbody.cs" />
