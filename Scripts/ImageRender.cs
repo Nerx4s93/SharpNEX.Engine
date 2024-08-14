@@ -14,7 +14,9 @@
                 return;
             }
 
-            var newPosition = Position + DeltaPosition;
+            var camera = Camera.GetCamera(Camera.СurrentCamera);
+
+            var newPosition = Position + DeltaPosition - camera.Position;
             var newRotation = Rotation + DeltaRotation;
 
             GraphicsRender.DrawImage(Image, newPosition, Size, newRotation.Angle);
