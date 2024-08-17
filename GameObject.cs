@@ -148,9 +148,6 @@ namespace SharpNEX.Engine
 
         public void Instante(Script script)
         {
-            script.Start();
-            script.IsScriptStarted = true;
-
             Scripts.Add(script);
         }
 
