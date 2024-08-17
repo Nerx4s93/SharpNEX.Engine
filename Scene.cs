@@ -1,21 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SharpNEX.Engine
 {
     public class Scene
     {
+        private List<GameObject> _gameObjects;
+
         public Scene(string Name, List<GameObject> GameObjects)
         {
             this.Name = Name;
-            this.GameObjects = GameObjects;
+            _gameObjects = GameObjects;
         }
 
         public string Name;
-        public List<GameObject> GameObjects;
+
+        public ReadOnlyCollection<GameObject> GetGameObjects()
+        {
+            return _gameObjects.AsReadOnly();
+        }
 
         internal void Update()
         {
-            foreach (var gameObject in GameObjects)
+            foreach (var gameObject in _gameObjects)
             {
                 var scripts = gameObject.GetScripts();
 
@@ -32,7 +39,7 @@ namespace SharpNEX.Engine
                 }
             }
 
-            foreach (var gameObject in GameObjects)
+            foreach (var gameObject in _gameObjects)
             {
                 var scripts = gameObject.GetScripts();
 
