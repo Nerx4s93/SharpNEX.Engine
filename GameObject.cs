@@ -145,5 +145,15 @@ namespace SharpNEX.Engine
 
             throw new InvalidOperationException($"Скрипт \"{typeof(T).Name}\" не наден");
         }
+
+        public void Instante(GameObject gameObject)
+        {
+            Game.Scene.Instante(gameObject);
+        }
+
+        public void Instante(GameObject gameObject, GameObject parent)
+        {
+            Game.Scene.Instante(gameObject, parent);
+        }
     }
 }

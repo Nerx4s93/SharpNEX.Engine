@@ -5,12 +5,14 @@ namespace SharpNEX.Engine
 {
     public class Scene
     {
-        private List<GameObject> _gameObjects;
+        private readonly List<GameObject> _gameObjects;
+        private readonly List<GameObject> _loadGameObjects;
 
         public Scene(string Name, List<GameObject> GameObjects)
         {
             this.Name = Name;
             _gameObjects = GameObjects;
+            _loadGameObjects = new List<GameObject>();
         }
 
         public string Name;
@@ -20,8 +22,22 @@ namespace SharpNEX.Engine
             return _gameObjects.AsReadOnly();
         }
 
+        public void Instante(GameObject gameObject)
+        {
+            _loadGameObjects.Add(gameObject);
+        }
+
+        public void Instante(GameObject gameObject, GameObject parent)
+        {
+            gameObject.SetParent(parent);
+            _loadGameObjects.Add(gameObject);
+        }
+
         internal void Update()
         {
+            _gameObjects.AddRange(_loadGameObjects);
+            _loadGameObjects.Clear();
+
             foreach (var gameObject in _gameObjects)
             {
                 var scripts = gameObject.GetScripts();
