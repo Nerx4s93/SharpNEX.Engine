@@ -45,7 +45,8 @@ namespace SharpNEX.Engine.Components
 
         private void FormMouseDown(object sender, MouseEventArgs e)
         {
-            foreach (var gameObject in Game.Scene.GameObjects)
+            var gameObjects = Game.Scene.GetGameObjects();
+            foreach (var gameObject in gameObjects)
             {
                 var scripts = gameObject.GetScripts();
 
@@ -58,7 +59,8 @@ namespace SharpNEX.Engine.Components
 
         private void FormMouseUp(object sender, MouseEventArgs e)
         {
-            foreach (var gameObject in Game.Scene.GameObjects)
+            var gameObjects = Game.Scene.GetGameObjects();
+            foreach (var gameObject in gameObjects)
             {
                 var scripts = gameObject.GetScripts();
 
@@ -71,7 +73,8 @@ namespace SharpNEX.Engine.Components
 
         private void FormKeyDown(object sender, KeyEventArgs e)
         {
-            foreach (var gameObject in Game.Scene.GameObjects)
+            var gameObjects = Game.Scene.GetGameObjects();
+            foreach (var gameObject in gameObjects)
             {
                 var scripts = gameObject.GetScripts();
 
@@ -84,7 +87,8 @@ namespace SharpNEX.Engine.Components
 
         private void FormKeyUp(object sender, KeyEventArgs e)
         {
-            foreach (var gameObject in Game.Scene.GameObjects)
+            var gameObjects = Game.Scene.GetGameObjects();
+            foreach (var gameObject in gameObjects)
             {
                 var scripts = gameObject.GetScripts();
 

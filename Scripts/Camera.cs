@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 #pragma warning disable CS0168
 
@@ -13,8 +12,7 @@ namespace SharpNEX.Engine.Scripts
 
         internal static Camera GetCamera(int id)
         {
-            List<GameObject> gameObjects = Game.Scene.GameObjects;
-
+            var gameObjects = Game.Scene.GetGameObjects();
             foreach (var gameObject in gameObjects)
             {
                 try

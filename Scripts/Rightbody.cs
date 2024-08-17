@@ -40,8 +40,7 @@ namespace SharpNEX.Engine.Scripts
         {
             ForceMove();
 
-            var gameObjects = Game.Scene.GameObjects;
-
+            var gameObjects = Game.Scene.GetGameObjects();
             foreach (GameObject gameObject in gameObjects)
             {
                 if (gameObject == GameObject)
