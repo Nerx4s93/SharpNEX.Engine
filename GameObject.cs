@@ -148,7 +148,7 @@ namespace SharpNEX.Engine
 
         public void Instante(Script script)
         {
-            Scripts.Add(script);
+            Game.Scene.Instante(script, this);
         }
 
         public void Instante(GameObject gameObject)
@@ -159,6 +159,11 @@ namespace SharpNEX.Engine
         public void Instante(GameObject gameObject, GameObject parent)
         {
             Game.Scene.Instante(gameObject, parent);
+        }
+
+        internal void AddScript(Script script)
+        {
+            Scripts.Add(script);
         }
     }
 }
