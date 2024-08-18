@@ -10,6 +10,14 @@ namespace SharpNEX.Engine
         private readonly List<GameObject> _loadGameObjects;
         private readonly List<Script> _loadScripts;
 
+        public Scene(string Name)
+        {
+            this.Name = Name;
+            _gameObjects = new List<GameObject>();
+            _loadGameObjects = new List<GameObject>();
+            _loadScripts = new List<Script>();
+        }
+
         public Scene(string Name, List<GameObject> GameObjects)
         {
             this.Name = Name;
