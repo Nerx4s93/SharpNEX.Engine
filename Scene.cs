@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SharpDX.Direct2D1;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace SharpNEX.Engine
@@ -37,17 +38,32 @@ namespace SharpNEX.Engine
         {
             script.GameObject = gameObject;
             _loadScripts.Add(script);
+
+            if (Game.EditMode)
+            {
+                Instante();
+            }
         }
 
         public void Instante(GameObject gameObject)
         {
             _loadGameObjects.Add(gameObject);
+
+            if (Game.EditMode)
+            {
+                Instante();
+            }
         }
 
         public void Instante(GameObject gameObject, GameObject parent)
         {
             gameObject.SetParent(parent);
             _loadGameObjects.Add(gameObject);
+
+            if (Game.EditMode)
+            {
+                Instante();
+            }
         }
 
         internal void Update()
