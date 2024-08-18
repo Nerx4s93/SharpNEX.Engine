@@ -16,6 +16,8 @@ namespace SharpNEX.Engine
 
         private static Thread _gameThread;
 
+        public static bool EditMode = true;
+
         public static Scene Scene { get; internal set; }
 
         public static float DeltaTime { get; private set; }
