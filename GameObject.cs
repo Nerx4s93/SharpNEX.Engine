@@ -12,6 +12,12 @@ namespace SharpNEX.Engine
         private Rotation _rotation;
         private Vector _size;
 
+        public GameObject(string Name)
+        {
+            this.Name = Name;
+            this.Scripts = new List<Script>();
+        }
+
         public GameObject(string Name, List<Script> Scripts)
         {
             this.Name = Name;
