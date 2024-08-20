@@ -44,12 +44,12 @@ namespace SharpNEX.Engine
 
         public void Instante(GameObject gameObject)
         {
-            GameObject.Instante(gameObject);
+            Game.Scene.Instante(gameObject);
         }
 
         public void Instante(GameObject gameObject, GameObject parent)
         {
-            GameObject.Instante(gameObject, parent);
+            Game.Scene.Instante(gameObject, parent);
         }
 
         public void Destroy()
