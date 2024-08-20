@@ -37,7 +37,7 @@ namespace SharpNEX.Engine
             script.GameObject = gameObject;
             _loadScripts.Add(script);
 
-            if (Game.IsGameRun)
+            if (!Game.IsGameRun)
             {
                 Instante();
             }
@@ -47,7 +47,7 @@ namespace SharpNEX.Engine
         {
             _loadGameObjects.Add(gameObject);
 
-            if (Game.IsGameRun)
+            if (!Game.IsGameRun)
             {
                 Instante();
             }
@@ -58,7 +58,7 @@ namespace SharpNEX.Engine
             gameObject.SetParent(parent);
             _loadGameObjects.Add(gameObject);
 
-            if (Game.IsGameRun)
+            if (!Game.IsGameRun)
             {
                 Instante();
             }
@@ -68,7 +68,7 @@ namespace SharpNEX.Engine
         {
             _destroyScripts.Add(script);
 
-            if (Game.IsGameRun)
+            if (!Game.IsGameRun)
             {
                 Destroy();
             }
@@ -80,7 +80,7 @@ namespace SharpNEX.Engine
             _destroyGameObjects.Add(gameObject);
             _destroyGameObjects.AddRange(destroy);
 
-            if (Game.IsGameRun)
+            if (!Game.IsGameRun)
             {
                 Destroy();
             }
