@@ -1,4 +1,4 @@
-﻿using SharpDX.Direct2D1;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -8,23 +8,21 @@ namespace SharpNEX.Engine
     {
         private readonly List<GameObject> _gameObjects;
 
-        private readonly List<GameObject> _loadGameObjects;
-        private readonly List<Script> _loadScripts;
+        private readonly List<GameObject> _loadGameObjects = new List<GameObject>();
+        private readonly List<Script> _loadScripts = new List<Script>();
+        private readonly List<GameObject> _destroyGameObjects = new List<GameObject>();
+        private readonly List<Script> _destroyScripts = new List<Script>();
 
         public Scene(string Name)
         {
             this.Name = Name;
             _gameObjects = new List<GameObject>();
-            _loadGameObjects = new List<GameObject>();
-            _loadScripts = new List<Script>();
         }
 
         public Scene(string Name, List<GameObject> GameObjects)
         {
             this.Name = Name;
             _gameObjects = GameObjects;
-            _loadGameObjects = new List<GameObject>();
-            _loadScripts = new List<Script>();
         }
 
         public string Name;
@@ -66,9 +64,32 @@ namespace SharpNEX.Engine
             }
         }
 
+        public void Destroy(Script script)
+        {
+            _destroyScripts.Add(script);
+
+            if (Game.EditMode)
+            {
+                Destroy();
+            }
+        }
+
+        public void Destroy(GameObject gameObject)
+        {
+            var destroy = gameObject.GetAllTree();
+            _destroyGameObjects.Add(gameObject);
+            _destroyGameObjects.AddRange(destroy);
+
+            if (Game.EditMode)
+            {
+                Destroy();
+            }
+        }
+
         internal void Update()
         {
             Instante();
+            Destroy();
 
             foreach (var gameObject in _gameObjects)
             {
@@ -109,6 +130,20 @@ namespace SharpNEX.Engine
                 gameObject.AddScript(script);
             }
             _loadScripts.Clear();
+        }
+
+        private void Destroy()
+        {
+            foreach (var gameObject in _destroyGameObjects)
+            {
+                _gameObjects.Remove(gameObject);
+            }
+
+            foreach (var script in _destroyScripts)
+            {
+                var gameObject = script.GameObject;
+                gameObject?.RemoveScript(script);
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SharpNEX.Engine
 
         private static Thread _gameThread;
 
-        public static bool EditMode = true;
+        public static bool EditMode = false;
 
         public static Scene Scene { get; internal set; }
 

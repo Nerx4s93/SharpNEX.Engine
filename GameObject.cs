@@ -171,5 +171,23 @@ namespace SharpNEX.Engine
         {
             Scripts.Add(script);
         }
+
+        internal void RemoveScript(Script script)
+        {
+            Scripts.Remove(script);
+        }
+
+        internal List<GameObject> GetAllTree()
+        {
+            var result = Childs;
+
+            foreach (var gameObject in Childs)
+            {
+                var childsGameObjects = gameObject.GetAllTree();
+                result.AddRange(childsGameObjects);
+            }
+
+            return result;
+        }
     }
 }
