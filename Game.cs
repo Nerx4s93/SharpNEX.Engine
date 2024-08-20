@@ -16,7 +16,7 @@ namespace SharpNEX.Engine
 
         private static Thread _gameThread;
 
-        public static bool EditMode = false;
+        public static bool IsGameRun { get; private set; }
 
         public static Scene Scene { get; internal set; }
 
@@ -24,6 +24,8 @@ namespace SharpNEX.Engine
 
         public static void Run(string Name, Scene Scene, Size Size)
         {
+            IsGameRun = true;
+
             _name = Name;
             Game.Scene = Scene;
             _formSize = Size;
@@ -38,6 +40,7 @@ namespace SharpNEX.Engine
 
         public static void Stop()
         {
+            IsGameRun = false;
             _gameThread.Abort();
         }
 
