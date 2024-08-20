@@ -1,5 +1,8 @@
-﻿namespace SharpNEX.Engine.Scripts
+﻿using System;
+
+namespace SharpNEX.Engine.Scripts
 {
+    [Serializable]
     public class ImageRender : Script
     {
         public string Image;

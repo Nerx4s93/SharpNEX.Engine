@@ -4,6 +4,7 @@
 
 namespace SharpNEX.Engine.Scripts
 {
+    [Serializable]
     public class Camera : Script
     {
         public int ID;

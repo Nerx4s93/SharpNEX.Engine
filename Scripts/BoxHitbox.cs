@@ -1,5 +1,8 @@
-﻿namespace SharpNEX.Engine.Scripts
+﻿using System;
+
+namespace SharpNEX.Engine.Scripts
 {
+    [Serializable]
     public class BoxHitbox : HitboxBase
     {
         private float _hitboxSizeX;

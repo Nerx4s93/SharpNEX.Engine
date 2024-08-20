@@ -6,6 +6,7 @@ using SharpNEX.Engine.Utils;
 
 namespace SharpNEX.Engine.Scripts
 {
+    [Serializable]
     public class Rightbody : Script
     {
         private HitboxBase _hitboxBase;

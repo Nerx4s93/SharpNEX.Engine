@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SharpNEX.Engine
 {
+    [Serializable]
     public class GameObject
     {
         private readonly List<Script> Scripts;

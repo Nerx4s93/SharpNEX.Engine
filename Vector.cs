@@ -2,6 +2,7 @@
 
 namespace SharpNEX.Engine
 {
+    [Serializable]
     public struct Vector
     {
         public Vector(float X, float Y)

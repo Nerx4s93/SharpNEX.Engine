@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using SharpNEX.Engine.Utils;
 
@@ -6,6 +7,7 @@ using SharpDX.Mathematics.Interop;
 
 namespace SharpNEX.Engine.Scripts
 {
+    [Serializable]
     public class HitboxBase : Script
     {
         public bool IsTrigger;

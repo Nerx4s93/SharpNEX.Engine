@@ -1,7 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SharpNEX.Engine
 {
+    [Serializable]
     public class Script
     {
         public GameObject GameObject { get; internal set; }

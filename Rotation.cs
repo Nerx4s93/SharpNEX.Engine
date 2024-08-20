@@ -2,6 +2,7 @@
 
 namespace SharpNEX.Engine
 {
+    [Serializable]
     public struct Rotation
     {
         public Rotation(float Angle)
