@@ -70,8 +70,8 @@ namespace SharpNEX.Engine
         public virtual void Start() { }
         public virtual void Update() { }
 
-        public virtual void OnMouseDown() { }
-        public virtual void OnMouseUp() { }
+        public virtual void OnMouseDown(MouseEventArgs e) { }
+        public virtual void OnMouseUp(MouseEventArgs e) { }
         public virtual void OnKeyDown(KeyEventArgs e) { }
         public virtual void OnKeyUp(KeyEventArgs e) { }
 

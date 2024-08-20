@@ -52,7 +52,7 @@ namespace SharpNEX.Engine.Components
 
                 foreach (var script in scripts)
                 {
-                    script.OnMouseDown();
+                    script.OnMouseDown(e);
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace SharpNEX.Engine.Components
 
                 foreach (var script in scripts)
                 {
-                    script.OnMouseUp();
+                    script.OnMouseUp(e);
                 }
             }
         }
