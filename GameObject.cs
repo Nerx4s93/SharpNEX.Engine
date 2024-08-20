@@ -167,6 +167,11 @@ namespace SharpNEX.Engine
             Game.Scene.Instante(gameObject, parent);
         }
 
+        public void Destroy()
+        {
+            Game.Scene.Destroy(this);
+        }
+
         internal void AddScript(Script script)
         {
             Scripts.Add(script);

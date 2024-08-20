@@ -52,6 +52,21 @@ namespace SharpNEX.Engine
             GameObject.Instante(gameObject, parent);
         }
 
+        public void Destroy()
+        {
+            Game.Scene.Destroy(this);
+        }
+
+        public void Destroy(Script script)
+        {
+            Game.Scene.Destroy(script);
+        }
+
+        public void Destroy(GameObject gameObject)
+        {
+            Game.Scene.Destroy(gameObject);
+        }
+
         public virtual void Start() { }
         public virtual void Update() { }
 
