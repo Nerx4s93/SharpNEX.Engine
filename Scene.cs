@@ -45,7 +45,9 @@ namespace SharpNEX.Engine
 
         public void Instante(GameObject gameObject)
         {
-            _loadGameObjects.Add(gameObject);
+            var copyGameObject = gameObject.Copy();
+
+            _loadGameObjects.Add(copyGameObject);
 
             if (!Game.IsGameRun)
             {
@@ -55,8 +57,10 @@ namespace SharpNEX.Engine
 
         public void Instante(GameObject gameObject, GameObject parent)
         {
-            gameObject.SetParent(parent);
-            _loadGameObjects.Add(gameObject);
+            var copyGameObject = gameObject.Copy();
+
+            copyGameObject.SetParent(parent);
+            _loadGameObjects.Add(copyGameObject);
 
             if (!Game.IsGameRun)
             {

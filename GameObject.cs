@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SharpNEX.Engine
 {
@@ -188,6 +190,21 @@ namespace SharpNEX.Engine
             }
 
             return result;
+        }
+
+        internal GameObject Copy()
+        {
+            var gameObject = this;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                var binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(memoryStream, gameObject);
+                memoryStream.Position = 0;
+
+                var result = binaryFormatter.Deserialize(memoryStream) as GameObject;
+                return result;
+            }
         }
     }
 }
