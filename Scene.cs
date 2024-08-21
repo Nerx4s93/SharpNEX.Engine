@@ -46,6 +46,7 @@ namespace SharpNEX.Engine
         public GameObject Instantiate(GameObject gameObject)
         {
             var copyGameObject = gameObject.Copy();
+            copyGameObject.ClearChild();
 
             var copyTree = gameObject.GetAllCopyTree(copyGameObject);
 
@@ -63,6 +64,7 @@ namespace SharpNEX.Engine
         public GameObject Instantiate(GameObject gameObject, GameObject parent)
         {
             var copyGameObject = gameObject.Copy();
+            copyGameObject.ClearChild();
             copyGameObject.SetParent(parent);
 
             var copyTree = gameObject.GetAllCopyTree(copyGameObject);
