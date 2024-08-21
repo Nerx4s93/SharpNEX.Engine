@@ -32,7 +32,7 @@ namespace SharpNEX.Engine
             return _gameObjects.AsReadOnly();
         }
 
-        public void Instante(Script script, GameObject gameObject)
+        public void Instantiate(Script script, GameObject gameObject)
         {
             script.GameObject = gameObject;
             _loadScripts.Add(script);
@@ -43,7 +43,7 @@ namespace SharpNEX.Engine
             }
         }
 
-        public void Instante(GameObject gameObject)
+        public void Instantiate(GameObject gameObject)
         {
             var copyGameObject = gameObject.Copy();
 
@@ -55,7 +55,7 @@ namespace SharpNEX.Engine
             }
         }
 
-        public void Instante(GameObject gameObject, GameObject parent)
+        public void Instantiate(GameObject gameObject, GameObject parent)
         {
             var copyGameObject = gameObject.Copy();
 

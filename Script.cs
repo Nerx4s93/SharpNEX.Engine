@@ -39,19 +39,19 @@ namespace SharpNEX.Engine
 
         public bool IsScriptStarted { get; internal set; }
 
-        public void Instante(Script script)
+        public void Instantiate(Script script)
         {
-            GameObject.Instante(script);
+            GameObject.Instantiate(script);
         }
 
-        public void Instante(GameObject gameObject)
+        public void Instantiate(GameObject gameObject)
         {
-            Game.Scene.Instante(gameObject);
+            Game.Scene.Instantiate(gameObject);
         }
 
-        public void Instante(GameObject gameObject, GameObject parent)
+        public void Instantiate(GameObject gameObject, GameObject parent)
         {
-            Game.Scene.Instante(gameObject, parent);
+            Game.Scene.Instantiate(gameObject, parent);
         }
 
         public void Destroy()
