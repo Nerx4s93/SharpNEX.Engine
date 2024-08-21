@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SharpNEX.Engine
@@ -194,22 +195,26 @@ namespace SharpNEX.Engine
             return result;
         }
 
-        internal List<GameObject> GetAllCopyTree(GameObject parent)
+        internal List<GameObject> GetAllCopyTree(GameObject copyParent)
         {
-            var result = new List<GameObject>();
+            var originalTree = GetAllTree();
+            var copyMap = new Dictionary<GameObject, GameObject>();
 
-            foreach(var child in Childs)
+            foreach (var gameObject in originalTree)
             {
-                var copyChildGameObject = child.Copy();
-                copyChildGameObject.SetParent(parent);
-
-                var childs = child.GetAllCopyTree(copyChildGameObject);
-
-                result.Add(copyChildGameObject);
-                result.AddRange(childs);
+                var copiedGameObject = gameObject.Copy();
+                copyMap[gameObject] = copiedGameObject;
             }
 
-            return result;
+            foreach (var originalGameObject in originalTree)
+            {
+                var copiedGameObject = copyMap[originalGameObject];
+                var parent = originalGameObject.Parent == this ? copyParent : copyMap[originalGameObject.Parent];
+
+                copiedGameObject.SetParent(parent);
+            }
+
+            return copyMap.Values.ToList();
         }
 
         internal GameObject Copy()
