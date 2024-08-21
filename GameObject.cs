@@ -182,7 +182,8 @@ namespace SharpNEX.Engine
 
         internal List<GameObject> GetAllTree()
         {
-            var result = Childs;
+            var result = new List<GameObject>();
+            result.AddRange(Childs);
 
             foreach (var gameObject in Childs)
             {
