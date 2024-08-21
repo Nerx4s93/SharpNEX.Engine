@@ -194,15 +194,19 @@ namespace SharpNEX.Engine
             return result;
         }
 
-        internal List<GameObject> GetAllCopyTree()
+        internal List<GameObject> GetAllCopyTree(GameObject parent)
         {
-            var tree = GetAllTree();
-
             var result = new List<GameObject>();
-            foreach (var gameObject in tree)
+
+            foreach(var child in Childs)
             {
-                var copyGameObject = gameObject.Copy();
-                result.Add(copyGameObject);
+                var copyChildGameObject = child.Copy();
+                copyChildGameObject.SetParent(parent);
+
+                var childs = child.GetAllCopyTree(copyChildGameObject);
+
+                result.Add(copyChildGameObject);
+                result.AddRange(childs);
             }
 
             return result;
