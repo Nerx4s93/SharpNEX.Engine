@@ -18,7 +18,7 @@ namespace SharpNEX.Engine
         public GameObject(string Name)
         {
             this.Name = Name;
-            this.Scripts = new List<Script>();
+            Scripts = new List<Script>();
         }
 
         public GameObject(string Name, List<Script> Scripts)
