@@ -46,8 +46,10 @@ namespace SharpNEX.Engine
         public void Instantiate(GameObject gameObject)
         {
             var copyGameObject = gameObject.Copy();
+            var copyTree = gameObject.GetAllCopyTree();
 
             _loadGameObjects.Add(copyGameObject);
+            _loadGameObjects.AddRange(copyTree);
 
             if (!Game.IsGameRun)
             {
@@ -58,9 +60,10 @@ namespace SharpNEX.Engine
         public void Instantiate(GameObject gameObject, GameObject parent)
         {
             var copyGameObject = gameObject.Copy();
+            var copyTree = gameObject.GetAllCopyTree();
 
-            copyGameObject.SetParent(parent);
             _loadGameObjects.Add(copyGameObject);
+            _loadGameObjects.AddRange(copyTree);
 
             if (!Game.IsGameRun)
             {
