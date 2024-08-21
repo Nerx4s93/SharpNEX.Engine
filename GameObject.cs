@@ -124,6 +124,11 @@ namespace SharpNEX.Engine
             gameObject?.AddChild(this);
         }
 
+        internal void ClearChild()
+        {
+            Childs.Clear();
+        }
+
         public T GetScript<T>()
         {
             foreach (Script script in Scripts)
