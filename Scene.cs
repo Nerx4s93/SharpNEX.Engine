@@ -62,6 +62,8 @@ namespace SharpNEX.Engine
         public GameObject Instantiate(GameObject gameObject, GameObject parent)
         {
             var copyGameObject = gameObject.Copy();
+            copyGameObject.SetParent(parent);
+
             var copyTree = gameObject.GetAllCopyTree();
 
             _loadGameObjects.Add(copyGameObject);
