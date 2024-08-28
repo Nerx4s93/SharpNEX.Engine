@@ -48,66 +48,65 @@ namespace SharpNEX.Engine.Scripts
                 {
                     continue;
                 }
-
-                try
+                if (!gameObject.HasScriptFromBaseType<HitboxBase>())
                 {
-                    var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
-                    bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
-                    var scripts = GameObject.GetScripts();
+                    continue;
+                }
 
-                    if (colision)
-                    {
-                        if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
-                        {
-                            bool gameObjecctExists = hitboxBase.GameObjectsTriggerEnter.Exists(x => x == GameObject);
+                var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
+                bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
+                var scripts = GameObject.GetScripts();
 
-                            if (!gameObjecctExists)
-                            {
-                                hitboxBase.GameObjectsTriggerEnter.Add(GameObject);
-
-                                foreach (Script script in scripts)
-                                {
-                                    script.OnTriggerEnter(gameObject);
-                                }
-                            }
-                        }
-                        else if (!_hitboxBase.IsTrigger)
-                        {
-                            Physics.RepellingObjects(GameObject, gameObject);
-
-                            foreach (Script script in scripts)
-                            {
-                                script.OnCollision(gameObject);
-                            }
-
-                            try
-                            {
-                                var righitbody = gameObject.GetScript<Rightbody>();
-
-                                var newVelocity = Velocity * Weight / (Weight + righitbody.Weight);
-
-                                righitbody.Velocity = newVelocity;
-                                Velocity = newVelocity;
-                            }
-                            catch (InvalidOperationException invalidOperationException) { }
-                        }
-                    }
-                    else if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
+                if (colision)
+                {
+                    if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
                     {
                         bool gameObjecctExists = hitboxBase.GameObjectsTriggerEnter.Exists(x => x == GameObject);
 
-                        if (gameObjecctExists)
+                        if (!gameObjecctExists)
                         {
-                            hitboxBase.GameObjectsTriggerEnter.Remove(GameObject);
+                            hitboxBase.GameObjectsTriggerEnter.Add(GameObject);
 
                             foreach (Script script in scripts)
                             {
-                                script.OnTriggerLeave(gameObject);
+                                script.OnTriggerEnter(gameObject);
                             }
                         }
                     }
+                    else if (!_hitboxBase.IsTrigger)
+                    {
+                        Physics.RepellingObjects(GameObject, gameObject);
+
+                        foreach (Script script in scripts)
+                        {
+                            script.OnCollision(gameObject);
+                        }
+
+                        if (gameObject.HasScript<Rightbody>())
+                        {
+                            var righitbody = gameObject.GetScript<Rightbody>();
+
+                            var newVelocity = Velocity * Weight / (Weight + righitbody.Weight);
+
+                            righitbody.Velocity = newVelocity;
+                            Velocity = newVelocity;
+                        }
+                    }
                 }
-                catch (InvalidOperationException invalidOperationException) { }
+                else if (!_hitboxBase.IsTrigger && hitboxBase.IsTrigger)
+                {
+                    bool gameObjecctExists = hitboxBase.GameObjectsTriggerEnter.Exists(x => x == GameObject);
+
+                    if (gameObjecctExists)
+                    {
+                        hitboxBase.GameObjectsTriggerEnter.Remove(GameObject);
+
+                        foreach (Script script in scripts)
+                        {
+                            script.OnTriggerLeave(gameObject);
+                        }
+                    }
+                }
             }
         }
 
