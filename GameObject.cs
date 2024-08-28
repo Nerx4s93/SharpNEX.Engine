@@ -124,6 +124,21 @@ namespace SharpNEX.Engine
             gameObject?.AddChild(this);
         }
 
+        public bool HasScript<T>()
+        {
+            foreach (Script script in Scripts)
+            {
+                var scriptType = script.GetType();
+
+                if (typeof(T) == scriptType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public T GetScript<T>()
         {
             foreach (Script script in Scripts)
