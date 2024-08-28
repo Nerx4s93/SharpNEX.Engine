@@ -139,6 +139,21 @@ namespace SharpNEX.Engine
             return false;
         }
 
+        public bool HasScriptFromBaseType<T>()
+        {
+            foreach (Script script in Scripts)
+            {
+                var baseScriptType = script.GetType().BaseType;
+
+                if (typeof(T).IsAssignableFrom(baseScriptType))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public T GetScript<T>()
         {
             foreach (Script script in Scripts)
