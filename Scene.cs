@@ -46,8 +46,6 @@ namespace SharpNEX.Engine
         public GameObject Instantiate(GameObject gameObject)
         {
             var copyGameObject = gameObject.Copy();
-            copyGameObject.ClearChild();
-
             var tree = gameObject.GetAllTree();
 
             _loadGameObjects.Add(copyGameObject);
@@ -64,10 +62,9 @@ namespace SharpNEX.Engine
         public GameObject Instantiate(GameObject gameObject, GameObject parent)
         {
             var copyGameObject = gameObject.Copy();
-            copyGameObject.ClearChild();
-            copyGameObject.SetParent(parent);
-
             var tree = gameObject.GetAllTree();
+
+            copyGameObject.SetParent(parent);
 
             _loadGameObjects.Add(copyGameObject);
             _loadGameObjects.AddRange(tree);
@@ -93,6 +90,7 @@ namespace SharpNEX.Engine
         public void Destroy(GameObject gameObject)
         {
             var destroy = gameObject.GetAllTree();
+
             _destroyGameObjects.Add(gameObject);
             _destroyGameObjects.AddRange(destroy);
 
