@@ -233,6 +233,11 @@ namespace SharpNEX.Engine
                 memoryStream.Position = 0;
 
                 var result = binaryFormatter.Deserialize(memoryStream) as GameObject;
+                var copyChilds = GetAllCopyTree(result);
+
+                result.Childs.Clear();
+                result.Childs.AddRange(copyChilds);
+
                 return result;
             }
         }

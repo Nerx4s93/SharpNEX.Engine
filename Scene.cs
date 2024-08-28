@@ -48,10 +48,10 @@ namespace SharpNEX.Engine
             var copyGameObject = gameObject.Copy();
             copyGameObject.ClearChild();
 
-            var copyTree = gameObject.GetAllCopyTree(copyGameObject);
+            var tree = gameObject.GetAllTree();
 
             _loadGameObjects.Add(copyGameObject);
-            _loadGameObjects.AddRange(copyTree);
+            _loadGameObjects.AddRange(tree);
 
             if (!Game.IsGameRun)
             {
@@ -67,10 +67,10 @@ namespace SharpNEX.Engine
             copyGameObject.ClearChild();
             copyGameObject.SetParent(parent);
 
-            var copyTree = gameObject.GetAllCopyTree(copyGameObject);
+            var tree = gameObject.GetAllTree();
 
             _loadGameObjects.Add(copyGameObject);
-            _loadGameObjects.AddRange(copyTree);
+            _loadGameObjects.AddRange(tree);
 
             if (!Game.IsGameRun)
             {
