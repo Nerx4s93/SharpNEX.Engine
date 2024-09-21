@@ -238,7 +238,7 @@ namespace SharpNEX.Engine
             foreach (var gameObject in originalTree)
             {
                 var copiedGameObject = gameObject.Copy();
-                copyMap[gameObject] = copiedGameObject;
+                copyMap[gameObject] = copiedGameObject[0];
             }
 
             foreach (var originalGameObject in originalTree)
@@ -252,7 +252,7 @@ namespace SharpNEX.Engine
             return copyMap.Values.ToList();
         }
 
-        internal GameObject Copy()
+        internal List<GameObject> Copy()
         {
             var gameObject = this;
 
@@ -262,12 +262,16 @@ namespace SharpNEX.Engine
                 binaryFormatter.Serialize(memoryStream, gameObject);
                 memoryStream.Position = 0;
 
-                var result = binaryFormatter.Deserialize(memoryStream) as GameObject;
-                var copyChilds = GetAllCopyTree(result);
+                var result = new List<GameObject>() { binaryFormatter.Deserialize(memoryStream) as GameObject };
+                var copyChilds = GetAllCopyTree(result[0]);
 
-                result.Childs.Clear();
-                result.Childs.AddRange(copyChilds);
+                result[0].Childs.Clear();
+                foreach (var child in copyChilds)
+                {
+                    result[0].AddChild(child);
+                }
 
+                result.AddRange(copyChilds);
                 return result;
             }
         }
