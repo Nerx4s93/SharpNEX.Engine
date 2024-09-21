@@ -265,13 +265,8 @@ namespace SharpNEX.Engine
                 var result = new List<GameObject>() { binaryFormatter.Deserialize(memoryStream) as GameObject };
                 var copyChilds = GetAllCopyTree(result[0]);
 
-                result[0].Childs.Clear();
-                foreach (var child in copyChilds)
-                {
-                    result[0].AddChild(child);
-                }
-
                 result.AddRange(copyChilds);
+
                 return result;
             }
         }
