@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
+using System.Windows.Forms;
 
 using SharpNEX.Engine.Components;
 
@@ -19,13 +20,13 @@ namespace SharpNEX.Engine
 
         public static float DeltaTime { get; private set; }
 
-        public static void Run(Scene Scene, IntPtr Handle, Size Size)
+        public static void Run(Scene Scene, Form form, IntPtr Handle, Size Size)
         {
             IsGameRun = true;
 
             Game.Scene = Scene;
 
-            _formManager = new HandleManager(Handle, Size);
+            _formManager = new HandleManager(form, Handle, Size);
             _formManager.Run();
 
             _gameThread = new Thread(Handler);
@@ -36,6 +37,7 @@ namespace SharpNEX.Engine
         {
             IsGameRun = false;
             _gameThread.Abort();
+            _formManager.Stop();
         }
 
         private static void Handler()

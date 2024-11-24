@@ -6,11 +6,13 @@ namespace SharpNEX.Engine.Components
 {
     internal class HandleManager
     {
-        private IntPtr _handle;
-        private Size _size;
+        private readonly Form _form;
+        private readonly IntPtr _handle;
+        private readonly Size _size;
 
-        public HandleManager(IntPtr handle, Size size)
+        public HandleManager(Form form, IntPtr handle, Size size)
         {
+            _form = form;
             _handle = handle;
             _size = size;
         }
@@ -21,13 +23,22 @@ namespace SharpNEX.Engine.Components
         {
             GraphicsRender.SetForm(_handle, _size);
 
-            /*
- _form.MouseDown += FormMouseDown;
- _form.MouseUp += FormMouseUp;
- _form.KeyDown += FormKeyDown;
- _form.KeyUp += FormKeyUp;*/
+            _form.MouseDown += FormMouseDown;
+            _form.MouseUp += FormMouseUp;
+            _form.KeyDown += FormKeyDown;
+            _form.KeyUp += FormKeyUp;
 
             IsRuned = true;
+        }
+
+        public void Stop()
+        {
+            _form.MouseDown -= FormMouseDown;
+            _form.MouseUp -= FormMouseUp;
+            _form.KeyDown -= FormKeyDown;
+            _form.KeyUp -= FormKeyUp;
+
+            IsRuned = false;
         }
 
         private void FormMouseDown(object sender, MouseEventArgs e)
