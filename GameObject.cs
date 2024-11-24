@@ -12,6 +12,7 @@ namespace SharpNEX.Engine
     {
         private readonly List<Script> Scripts;
         private readonly List<GameObject> Childs = new List<GameObject>();
+
         private Vector _position;
         private Rotation _rotation;
         private Vector _size;

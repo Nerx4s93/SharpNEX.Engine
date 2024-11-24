@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-using SharpNEX.Engine.Utils;
+﻿using SharpNEX.Engine.Utils;
 using SharpNEX.Engine.Components;
 
 using SharpDX;

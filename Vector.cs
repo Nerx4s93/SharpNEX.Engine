@@ -14,8 +14,6 @@ namespace SharpNEX.Engine
 
         public float Y;
 
-        public static Vector Zero = new Vector(0, 0);
-
         #region Операторы
 
         public static Vector operator +(Vector a, Vector b)
@@ -58,9 +56,9 @@ namespace SharpNEX.Engine
         public Vector Normalize()
         {
             float length = GetLenght();
-
-            var result = new Vector(X / length, Y / length);
-            return result;
+            return new Vector(X / length, Y / length);
         }
+
+        public static readonly Vector Zero = new Vector(0, 0);
     }
 }
