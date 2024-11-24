@@ -4,43 +4,30 @@ using System.Windows.Forms;
 
 namespace SharpNEX.Engine.Components
 {
-    internal class FormManager
+    internal class HandleManager
     {
-        private Form _form;
+        private IntPtr _handle;
+        private Size _size;
 
-        public FormManager(string Title, Size Size)
+        public HandleManager(IntPtr handle, Size size)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            _form = new Form();
-            _form.Text = Title;
-            _form.Size = Size;
-            _form.FormBorderStyle = FormBorderStyle.FixedSingle;
-
-            _form.Shown += FormShown;
-            _form.MouseDown += FormMouseDown;
-            _form.MouseUp += FormMouseUp;
-            _form.KeyDown += FormKeyDown;
-            _form.KeyUp += FormKeyUp;
+            _handle = handle;
+            _size = size;
         }
 
-        public bool IsShown { get; private set; }
+        public bool IsRuned { get; private set; }
 
         public void Run()
         {
-            Application.Run(_form);
-        }
+            GraphicsRender.SetForm(_handle, _size);
 
-        public void Stop()
-        {
-            _form.Dispose();
-        }
+            /*
+ _form.MouseDown += FormMouseDown;
+ _form.MouseUp += FormMouseUp;
+ _form.KeyDown += FormKeyDown;
+ _form.KeyUp += FormKeyUp;*/
 
-        private void FormShown(object sender, EventArgs e)
-        {
-            GraphicsRender.SetForm(_form);
-            IsShown = true;
+            IsRuned = true;
         }
 
         private void FormMouseDown(object sender, MouseEventArgs e)

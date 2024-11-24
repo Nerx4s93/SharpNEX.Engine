@@ -6,6 +6,7 @@ using SharpNEX.Engine.Components;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.Mathematics.Interop;
+using System;
 
 namespace SharpNEX.Engine
 {
@@ -34,10 +35,10 @@ namespace SharpNEX.Engine
 
         private static WindowRenderTarget _renderTarget;
 
-        public static void SetForm(Form form)
+        public static void SetForm(IntPtr Handle, System.Drawing.Size size)
         {
-            var hwnd = form.Handle;
-            int width = form.Width; int height = form.Height;
+            var hwnd = Handle;
+            int width = size.Width; int height = size.Height;
 
             var factory = new Factory();
             var renderProps = new RenderTargetProperties(

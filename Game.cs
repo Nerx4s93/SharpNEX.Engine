@@ -9,10 +9,7 @@ namespace SharpNEX.Engine
 {
     public static class Game
     {
-        private static string _name;
-
-        private static FormManager _formManager;
-        private static Size _formSize;
+        private static HandleManager _formManager;
 
         private static Thread _gameThread;
 
@@ -22,20 +19,17 @@ namespace SharpNEX.Engine
 
         public static float DeltaTime { get; private set; }
 
-        public static void Run(string Name, Scene Scene, Size Size)
+        public static void Run(Scene Scene, IntPtr Handle, Size Size)
         {
             IsGameRun = true;
 
-            _name = Name;
             Game.Scene = Scene;
-            _formSize = Size;
 
-            _formManager = new FormManager(_name, _formSize);
+            _formManager = new HandleManager(Handle, Size);
+            _formManager.Run();
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();
-
-            _formManager.Run();
         }
 
         public static void Stop()
@@ -46,7 +40,7 @@ namespace SharpNEX.Engine
 
         private static void Handler()
         {
-            while (!_formManager.IsShown) { }
+            while (!_formManager.IsRuned) { }
 
             var fps = new FPS();
 
