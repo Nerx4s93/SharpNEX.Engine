@@ -9,6 +9,32 @@ namespace SharpNEX.Engine
     // Log handle
     public static class Debug
     {
+        public class Message
+        {
+            public Message(MessageType messageType, DateTime dateTime, string text)
+            {
+                MessageType = messageType;
+                DateTime = dateTime;
+                Text = text;
+            }
+
+            public readonly MessageType MessageType;
+            public readonly DateTime DateTime;
+            public readonly string Text;
+
+            public override string ToString()
+            {
+                return $"[{nameof(MessageType)}] [{DateTime.ToString("T")}] {Text}";
+            }
+        }
+
+        public enum MessageType
+        {
+            Info,
+            Warning,
+            Error
+        }
+
         private static readonly List<Message> messages = new List<Message>();
         private static string stringFormat;
 
@@ -40,32 +66,6 @@ namespace SharpNEX.Engine
         public static string GetLine(int index)
         {
             return messages[index].ToString();
-        }
-
-        public class Message
-        {
-            public Message(MessageType messageType, DateTime dateTime, string text)
-            {
-                MessageType = messageType;
-                DateTime = dateTime;
-                Text = text;
-            }
-
-            public readonly MessageType MessageType;
-            public readonly DateTime DateTime;
-            public readonly string Text;
-
-            public override string ToString()
-            {
-                return $"[{nameof(MessageType)}] [{DateTime.ToString("T")}] {Text}";
-            }
-        }
-
-        public enum MessageType
-        {
-            Info,
-            Warning,
-            Error
         }
     }
 }
