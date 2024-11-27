@@ -6,7 +6,6 @@ namespace SharpNEX.Engine
     // TODO:
     //
     // public static void Save()
-    // Log handle
     public static class Debug
     {
         public class Message
