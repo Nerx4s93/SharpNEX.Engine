@@ -40,9 +40,7 @@ namespace SharpNEX.Engine
 
         public static void Log(string text)
         {
-            var message = new Message(MessageType.Info, DateTime.Now, text);
-            messages.Add(message);
-            stringFormat += "\n" + message.ToString();
+            Log(MessageType.Info, text);
         }
 
         public static void Log(MessageType messageType, string text)
@@ -50,6 +48,7 @@ namespace SharpNEX.Engine
             var message = new Message(messageType, DateTime.Now, text);
             messages.Add(message);
             stringFormat += "\n" + message.ToString();
+            OnGetLog?.Invoke(message);
         }
 
         public static void Clear()
@@ -67,5 +66,9 @@ namespace SharpNEX.Engine
         {
             return messages[index].ToString();
         }
+
+        public delegate void GetLog(Message message);
+
+        public static event GetLog OnGetLog;
     }
 }
