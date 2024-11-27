@@ -5,7 +5,6 @@ namespace SharpNEX.Engine
 {
     // TODO:
     //
-    // public static void LogError()
     // public static void Save()
     // Log handle
     public static class Debug
@@ -15,7 +14,14 @@ namespace SharpNEX.Engine
 
         public static void Log(string text)
         {
-            var message = new Message(DateTime.Now, text);
+            var message = new Message(MessageType.Info, DateTime.Now, text);
+            messages.Add(message);
+            stringFormat += "\n" + message.ToString();
+        }
+
+        public static void Log(MessageType messageType, string text)
+        {
+            var message = new Message(messageType, DateTime.Now, text);
             messages.Add(message);
             stringFormat += "\n" + message.ToString();
         }
@@ -38,19 +44,28 @@ namespace SharpNEX.Engine
 
         public class Message
         {
-            public Message(DateTime dateTime, string text)
+            public Message(MessageType messageType, DateTime dateTime, string text)
             {
+                MessageType = messageType;
                 DateTime = dateTime;
                 Text = text;
             }
 
+            public readonly MessageType MessageType;
             public readonly DateTime DateTime;
             public readonly string Text;
 
             public override string ToString()
             {
-                return $"[{DateTime.ToString("T")}] {Text}";
+                return $"[{nameof(MessageType)}] [{DateTime.ToString("T")}] {Text}";
             }
+        }
+
+        public enum MessageType
+        {
+            Info,
+            Warning,
+            Error
         }
     }
 }
