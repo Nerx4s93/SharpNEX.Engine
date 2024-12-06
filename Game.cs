@@ -20,14 +20,17 @@ namespace SharpNEX.Engine
 
         public static float DeltaTime { get; private set; }
 
-        public static void Run(Scene Scene, Form form, IntPtr Handle, Size Size)
+        public static void SetHandle(Form form, IntPtr Handle, Size Size)
+        {
+            _formManager = new HandleManager(form, Handle, Size);
+            _formManager.Run();
+        }
+
+        public static void Run(Scene Scene)
         {
             IsGameRun = true;
 
             Game.Scene = Scene;
-
-            _formManager = new HandleManager(form, Handle, Size);
-            _formManager.Run();
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();
