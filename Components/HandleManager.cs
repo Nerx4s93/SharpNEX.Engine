@@ -15,14 +15,14 @@ namespace SharpNEX.Engine.Components
             _form = form;
             _handle = handle;
             _size = size;
+
+            GraphicsRender.SetForm(_handle, _size);
         }
 
         public bool IsRuned { get; private set; }
 
         public void Run()
         {
-            GraphicsRender.SetForm(_handle, _size);
-
             _form.MouseDown += FormMouseDown;
             _form.MouseUp += FormMouseUp;
             _form.KeyDown += FormKeyDown;

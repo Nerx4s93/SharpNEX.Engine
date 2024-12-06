@@ -23,7 +23,6 @@ namespace SharpNEX.Engine
         public static void SetHandle(Form form, IntPtr Handle, Size Size)
         {
             _formManager = new HandleManager(form, Handle, Size);
-            _formManager.Run();
         }
 
         public static void Run(Scene Scene)
@@ -31,6 +30,8 @@ namespace SharpNEX.Engine
             IsGameRun = true;
 
             Game.Scene = Scene;
+
+            _formManager.Run();
 
             _gameThread = new Thread(Handler);
             _gameThread.Start();
