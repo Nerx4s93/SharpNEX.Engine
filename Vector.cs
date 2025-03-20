@@ -75,5 +75,10 @@ namespace SharpNEX.Engine
             float length = GetLength();
             return new Vector(X / length, Y / length);
         }
+
+        public float Dot(Vector v)
+        {
+            return X * v.X + Y * v.Y;
+        }
     }
 }
