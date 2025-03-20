@@ -12,7 +12,8 @@ namespace SharpNEX.Engine.Scripts
         private HitboxBase _hitboxBase;
         private Vector _velocity;
 
-        public float Friction = 10000;
+        public float Elasticity = 0.5f;
+        public float Friction = 20000;
         public float Weight = 200;
 
         public Vector Velocity
@@ -96,8 +97,7 @@ namespace SharpNEX.Engine.Scripts
                             var v1 = Velocity;
                             var v2 = rightbodyB.Velocity;
 
-                            float e = 0.8f;
-
+                            float e = (Elasticity + rightbodyB.Elasticity) / 2;
                             var totalMass = m1 + m2;
                             var velocityDiff = v2 - v1;
 
