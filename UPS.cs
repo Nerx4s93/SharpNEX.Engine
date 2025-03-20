@@ -2,7 +2,7 @@
 
 namespace SharpNEX.Engine
 {
-    internal class FPS
+    internal class UPS
     {
         private int sum = 0;
         private Queue<int> tiks = new Queue<int>();

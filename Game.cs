@@ -48,7 +48,7 @@ namespace SharpNEX.Engine
         {
             while (!_formManager.IsRuned) { }
 
-            var fps = new FPS();
+            var fps = new UPS();
 
             while (true)
             {
@@ -60,7 +60,7 @@ namespace SharpNEX.Engine
 
                 fps.AddTik(Convert.ToInt32(stopwatch.ElapsedMilliseconds));
                 DeltaTime = 60 / Convert.ToSingle(fps.GetFPS());
-                Console.WriteLine("FPS : {0}", fps.GetFPS());
+                Console.WriteLine("UPS : {0}", fps.GetFPS());
             }
         }
 
