@@ -5,6 +5,13 @@ namespace SharpNEX.Engine
     [Serializable]
     public struct Vector
     {
+        public static readonly Vector Zero = new Vector(0, 0);
+
+        public static readonly Vector Left = new Vector(-1, 0);
+        public static readonly Vector Right = new Vector(1, 0);
+        public static readonly Vector Forward = new Vector(0, 1);
+        public static readonly Vector Back = new Vector(0, -1);
+
         public Vector(float X, float Y)
         {
             this.X = X; this.Y = Y;
@@ -58,7 +65,5 @@ namespace SharpNEX.Engine
             float length = GetLenght();
             return new Vector(X / length, Y / length);
         }
-
-        public static readonly Vector Zero = new Vector(0, 0);
     }
 }
