@@ -65,14 +65,14 @@ namespace SharpNEX.Engine
             return $"{{ X: {X}; Y: {Y} }}";
         }
 
-        public float GetLenght()
+        public float GetLength()
         {
             return (float)Math.Sqrt(X * X + Y * Y);
         }
 
         public Vector Normalize()
         {
-            float length = GetLenght();
+            float length = GetLength();
             return new Vector(X / length, Y / length);
         }
     }
