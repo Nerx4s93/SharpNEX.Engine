@@ -7,11 +7,7 @@ namespace SharpNEX.Engine
     {
         public Rotation(float Angle)
         {
-            while (Angle >= 360)
-            {
-                Angle -= 360;
-            }
-
+            Angle %= 360;
             this.Angle = Angle;
         }
 
