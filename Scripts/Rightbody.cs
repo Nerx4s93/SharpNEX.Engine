@@ -48,12 +48,13 @@ namespace SharpNEX.Engine.Scripts
                 {
                     continue;
                 }
-                if (!gameObject.HasScriptFromBaseType<HitboxBase>())
+
+                var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
+                if (hitboxBase == null)
                 {
                     continue;
                 }
 
-                var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
                 bool colision = Physics.ColisionHitboxes(_hitboxBase, hitboxBase);
                 var scripts = GameObject.GetScripts();
 
