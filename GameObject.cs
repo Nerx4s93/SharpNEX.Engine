@@ -66,7 +66,7 @@ namespace SharpNEX.Engine
 
                 foreach (var gameObjcet in Childs)
                 {
-                    gameObjcet.Rotation = _rotation;
+                    gameObjcet.Rotation += delta;
                 }
             }
         }
