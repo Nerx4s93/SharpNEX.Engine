@@ -101,6 +101,7 @@ namespace SharpNEX.Engine.Utils
             return normal;
         }
 
+        // Отталкивание объектов при сталкновении
         public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
         {
             var normal = CollisionNormal(gameObject.Position, gameObject1.Position);
