@@ -45,9 +45,9 @@ namespace SharpNEX.Engine
 
                 _position = value;
                 
-                foreach (var gameObjcet in Childs)
+                foreach (var gameObject in Childs)
                 {
-                    gameObjcet.Position += delta;
+                    gameObject.Position += delta;
                 }
             }
         }
@@ -64,9 +64,9 @@ namespace SharpNEX.Engine
 
                 _rotation = value;
 
-                foreach (var gameObjcet in Childs)
+                foreach (var gameObject in Childs)
                 {
-                    gameObjcet.Rotation += delta;
+                    gameObject.Rotation += delta;
                 }
             }
         }
@@ -83,9 +83,9 @@ namespace SharpNEX.Engine
 
                 _size = value;
 
-                foreach (var gameObjcet in Childs)
+                foreach (var gameObject in Childs)
                 {
-                    gameObjcet.Size += delta;
+                    gameObject.Size += delta;
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace SharpNEX.Engine
                 }
             }
 
-            throw new InvalidOperationException($"Скрипт \"{typeof(T).Name}\" не наден");
+            throw new InvalidOperationException($"Скрипт \"{typeof(T).Name}\" не найден");
         }
 
         public void Instantiate()
