@@ -1,5 +1,7 @@
 ﻿using System;
 
+using SharpNEX.Engine.Utils;
+
 namespace SharpNEX.Engine
 {
     [Serializable]
@@ -12,6 +14,7 @@ namespace SharpNEX.Engine
         }
 
         public float Angle;
+        public float Radians => Trigonometry.AngleDegreesToRadians(Angle);
 
         #region Операторы
 
