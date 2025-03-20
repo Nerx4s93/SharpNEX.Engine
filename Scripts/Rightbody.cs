@@ -21,7 +21,7 @@ namespace SharpNEX.Engine.Scripts
             {
                 return _velocity;
             }
-            private set
+            set
             {
                 _velocity = value;
             }
@@ -49,8 +49,12 @@ namespace SharpNEX.Engine.Scripts
                     continue;
                 }
 
-                var hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
-                if (hitboxBase == null)
+                HitboxBase hitboxBase;
+                try
+                {
+                    hitboxBase = gameObject.GetScriptFromBaseType<HitboxBase>();
+                }
+                catch
                 {
                     continue;
                 }
@@ -85,12 +89,23 @@ namespace SharpNEX.Engine.Scripts
 
                         if (gameObject.HasScript<Rightbody>())
                         {
-                            var righitbody = gameObject.GetScript<Rightbody>();
+                            var rightbodyB = gameObject.GetScript<Rightbody>();
 
-                            var newVelocity = Velocity * Weight / (Weight + righitbody.Weight);
+                            var m1 = Weight;
+                            var m2 = rightbodyB.Weight;
+                            var v1 = Velocity;
+                            var v2 = rightbodyB.Velocity;
 
-                            righitbody.Velocity = newVelocity;
-                            Velocity = newVelocity;
+                            float e = 0.8f;
+
+                            var totalMass = m1 + m2;
+                            var velocityDiff = v2 - v1;
+
+                            var newV1 = v1 + e * (2 * m2 / totalMass) * velocityDiff;
+                            var newV2 = v2 + e * (2 * m1 / totalMass) * -velocityDiff;
+
+                            Velocity = newV1;
+                            rightbodyB.Velocity = newV2;
                         }
                     }
                 }
