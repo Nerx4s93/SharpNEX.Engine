@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 
 using SharpNEX.Engine.Scripts;
+using System;
 
 namespace SharpNEX.Engine.Utils
 {
     internal static class Physics
     {
+        #region Проверка столкновения
+
         private static bool PointInRectangle(Vector polygonPosition, List<Vector> polygon, Vector point)
         {
             float minX = polygonPosition.X + polygon.Min(x => x.X);
@@ -92,26 +95,30 @@ namespace SharpNEX.Engine.Utils
             return pointInPolygon;
         }
 
-        // Нормализованный верктор разницы положения двух объектов
-        private static Vector CollisionNormal(Vector positionA, Vector positionB)
-        {
-            var collisionVector = positionA - positionB;
-            var normal = collisionVector.Normalize();
+        #endregion
 
-            return normal;
+        private static Vector GetAxisAlignedNormal(Vector positionA, Vector positionB)
+        {
+            Vector diff = positionA - positionB;
+
+            if (Math.Abs(diff.X) > Math.Abs(diff.Y))
+            {
+                return new Vector(Math.Sign(diff.X), 0);
+            }
+            else
+            {
+                return new Vector(0, Math.Sign(diff.Y));
+            }
         }
 
         // Отталкивание объектов при сталкновении
-        public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
+        public static void RepellingObjects(GameObject gameObjectA, GameObject gameObjectB)
         {
-            var normal = CollisionNormal(gameObject.Position, gameObject1.Position);
+            var normal = GetAxisAlignedNormal(gameObjectA.Position, gameObjectB.Position);
             float pushStrength = 3f;
 
-            var pushVectorA = normal * pushStrength;
-            var pushVectorB = -normal * pushStrength;
-
-            gameObject.Position += pushVectorA;
-            gameObject1.Position += pushVectorB;
+            gameObjectA.Position += normal * pushStrength;
+            gameObjectB.Position -= normal * pushStrength;
         }
 
         // Движение объекта
