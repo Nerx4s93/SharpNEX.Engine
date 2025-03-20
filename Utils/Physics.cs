@@ -44,15 +44,6 @@ namespace SharpNEX.Engine.Utils
             return isInside;
         }
 
-        // Нормализованный верктор разницы положения двух объектов
-        private static Vector CollisionNormal(Vector positionA, Vector positionB)
-        {
-            var collisionVector = positionA - positionB;
-            var normal = collisionVector.Normalize();
-
-            return normal;
-        }
-
         // Проверка нахождения точек из hitbox2 в области hitbox1
         public static bool AreasHitboxesIntersect(HitboxBase hitbox1, HitboxBase hitbox2)
         {
@@ -101,7 +92,15 @@ namespace SharpNEX.Engine.Utils
             return pointInPolygon;
         }
 
-        // Отдача двух объектов при столкновении
+        // Нормализованный верктор разницы положения двух объектов
+        private static Vector CollisionNormal(Vector positionA, Vector positionB)
+        {
+            var collisionVector = positionA - positionB;
+            var normal = collisionVector.Normalize();
+
+            return normal;
+        }
+
         public static void RepellingObjects(GameObject gameObject, GameObject gameObject1)
         {
             var normal = CollisionNormal(gameObject.Position, gameObject1.Position);
