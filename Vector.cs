@@ -48,6 +48,16 @@ namespace SharpNEX.Engine
             return new Vector(a.X / b, a.Y / b);
         }
 
+        public static Vector operator *(float a, Vector b)
+        {
+            return new Vector(b.X * a, b.Y * a);
+        }
+
+        public static Vector operator /(float a, Vector b)
+        {
+            return new Vector(b.X / a, b.Y / a);
+        }
+
         #endregion
 
         public override string ToString()
