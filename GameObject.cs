@@ -143,6 +143,12 @@ public class GameObject(string name, List<Script> scripts)
         }
     }
 
+
+    public List<GameObject> GetAllTreeList()
+    {
+        return GetAllTree().ToList();
+    }
+
     public GameObject Copy()
     {
         using var memoryStream = new MemoryStream();
