@@ -109,6 +109,7 @@ public class GameObject(string name, List<Script> scripts)
 
     public void Instantiate(Script script)
     {
+        script.GameObject = this;
         Game.Scene.Instantiate(script, this);
     }
 
