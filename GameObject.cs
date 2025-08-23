@@ -3,7 +3,7 @@
 namespace SharpNEX.Engine;
 
 [Serializable]
-internal class GameObject(string name, List<Script> scripts)
+public class GameObject(string name, List<Script> scripts)
 {
     private readonly List<Script> _scripts = scripts;
     private readonly HashSet<GameObject> _children = [];
@@ -95,6 +95,30 @@ internal class GameObject(string name, List<Script> scripts)
     {
         Parent?.RemoveChild(this);
         newParent?.AddChild(this);
+    }
+
+    #endregion
+
+    #region Создание и удаление
+
+    public void Instantiate()
+    {
+        Game.Scene.Instantiate(this);
+    }
+
+    public void Instantiate(Script script)
+    {
+        Game.Scene.Instantiate(script, this);
+    }
+
+    internal void AddScript(Script script)
+    {
+        _scripts.Add(script);
+    }
+
+    internal void RemoveScript(Script script)
+    {
+        _scripts.Remove(script);
     }
 
     #endregion

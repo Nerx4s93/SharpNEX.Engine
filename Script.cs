@@ -1,6 +1,6 @@
 ﻿namespace SharpNEX.Engine;
 
-internal class Script
+public class Script
 {
     public GameObject GameObject { get; internal set; }
 
