@@ -9,17 +9,13 @@ public static class Game
 
     private static IPlatform? _platform;
     private static IWindow? _window;
-    private static IRenderer? _renderer;
-    private static IInput? _input;
-    private static IGraphics? _graphics;
 
     public static Scene? CurrentScene;
     public static bool IsGameRun { get; private set; }
 
-    public static void Run(IPlatform platform, IGraphics graphics)
+    public static void Run(IPlatform platform)
     {
         _platform = platform;
-        _graphics = graphics;
         IsGameRun = true;
 
         _uiLoop = new Thread(UILoop);
@@ -36,12 +32,8 @@ public static class Game
 
     private static void GameLoop()
     {
-        _renderer = _platform!.CreateRenderer(_window!, _graphics!);
-        _input = _platform!.CreateInput();
-
         while (IsGameRun)
         {
-            _input.Update();
             Thread.Sleep(1);
         }
     }
