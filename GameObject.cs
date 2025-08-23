@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SharpNEX.Engine;
 
@@ -101,7 +102,7 @@ public class GameObject(string name, List<Script> scripts)
 
     #region Создание и удаление
 
-    public void Instantiate()
+   /* public void Instantiate()
     {
         Game.Scene.Instantiate(this);
     }
@@ -111,6 +112,11 @@ public class GameObject(string name, List<Script> scripts)
         Game.Scene.Instantiate(script, this);
     }
 
+    public void Destroy()
+    {
+        Game.Scene.Destroy(this);
+    }*/
+
     internal void AddScript(Script script)
     {
         _scripts.Add(script);
@@ -119,6 +125,33 @@ public class GameObject(string name, List<Script> scripts)
     internal void RemoveScript(Script script)
     {
         _scripts.Remove(script);
+    }
+
+    #endregion
+
+    #region Копирование
+
+    public IEnumerable<GameObject> GetAllTree()
+    {
+        yield return this;
+        foreach (var child in _children)
+        {
+            foreach (var descendant in child.GetAllTree())
+            {
+                yield return descendant;
+            }
+        }
+    }
+
+    public GameObject Copy()
+    {
+        using var memoryStream = new MemoryStream();
+#pragma warning disable SYSLIB0011
+        var formatter = new BinaryFormatter();
+        formatter.Serialize(memoryStream, this);
+        memoryStream.Position = 0;
+        return (GameObject)formatter.Deserialize(memoryStream);
+#pragma warning restore SYSLIB0011
     }
 
     #endregion
