@@ -13,6 +13,8 @@ internal class GameObject(string name, List<Script> scripts)
 
     public GameObject(string name) : this(name, []) { }
 
+    #region Описание игрового объекта
+
     public Vector Position
     {
         get => _position;
@@ -31,7 +33,9 @@ internal class GameObject(string name, List<Script> scripts)
         set => _size = value;
     }
 
-    #region Scripts
+    #endregion
+
+    #region Скрипты
 
     public bool HasScript<T>()
     {
