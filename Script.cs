@@ -33,6 +33,8 @@ public class Script
 
     #endregion
 
+    public virtual void Awake() { }
+    public virtual void OnEnable() { }
     public virtual void Start() { }
     public virtual void Update() { }
 }
