@@ -3,6 +3,6 @@
 public interface IPlatform
 {
     IWindow CreateWindow(string title, int width, int height);
-    IRenderer CreateRenderer(IWindow window);
-    IInput CreateInput(IWindow window);
+    IRenderer CreateRenderer(IWindow window, IGraphics graphics);
+    IInput CreateInput();
 }
