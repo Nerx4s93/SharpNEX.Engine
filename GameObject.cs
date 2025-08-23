@@ -102,7 +102,7 @@ public class GameObject(string name, List<Script> scripts)
 
     #region Создание и удаление
 
-   /* public void Instantiate()
+    public void Instantiate()
     {
         Game.Scene.Instantiate(this);
     }
@@ -115,7 +115,7 @@ public class GameObject(string name, List<Script> scripts)
     public void Destroy()
     {
         Game.Scene.Destroy(this);
-    }*/
+    }
 
     internal void AddScript(Script script)
     {
