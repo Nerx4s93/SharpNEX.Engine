@@ -104,18 +104,18 @@ public class GameObject(string name, List<Script> scripts)
 
     public void Instantiate()
     {
-        Game.Scene.Instantiate(this);
+        Game.CurrentScene?.Instantiate(this);
     }
 
     public void Instantiate(Script script)
     {
         script.GameObject = this;
-        Game.Scene.Instantiate(script, this);
+        Game.CurrentScene?.Instantiate(script, this);
     }
 
     public void Destroy()
     {
-        Game.Scene.Destroy(this);
+        Game.CurrentScene?.Destroy(this);
     }
 
     internal void AddScript(Script script)
