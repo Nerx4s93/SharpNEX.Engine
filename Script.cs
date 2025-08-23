@@ -1,5 +1,6 @@
 ﻿namespace SharpNEX.Engine;
 
+[Serializable]
 public class Script
 {
     public GameObject GameObject { get; internal set; }
