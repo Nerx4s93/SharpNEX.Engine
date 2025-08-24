@@ -32,16 +32,13 @@ public static class Game
 
     private static void GameLoop()
     {
-        var texture = _renderer!.CreateTexture(@"C:\Users\Никита\Desktop\1631e421-7b40-44fc-8854-de43748294a9.jpg");
-
         var fps = new UPS();
         var stopwatch = new Stopwatch();
         while (IsGameRun)
         {
             stopwatch.Restart();
 
-            _renderer.BeginFrame();
-            _renderer.DrawTexture(texture, 50, 50, texture.Width, texture.Height);
+            _renderer!.BeginFrame();
             SceneManager.CurrentScene!.Update();
             _renderer.EndFrame();
 
