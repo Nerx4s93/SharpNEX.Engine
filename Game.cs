@@ -14,17 +14,17 @@ public static class Game
     public static Scene? CurrentScene { get; internal set; }
     public static bool IsGameRun { get; private set; }
 
-    public static void Run(IPlatform platform, Scene scene)
+    public static void Run(IPlatform platform, int width, int height, Scene scene)
     {
         CurrentScene = scene;
 
         _platform = platform;
         IsGameRun = true;
 
-        _window = _platform.CreateWindow("Game", 720, 480);
+        _window = _platform.CreateWindow("Game", width, height);
 
         _renderer = _platform.CreateRenderer(_window, "GDIRenderer");
-        _renderer.Init(_window.Hwnd, 720, 480);
+        _renderer.Init(_window.Hwnd, width, height);
 
         _gameThread = new Thread(GameLoop);
         _gameThread.Start();
