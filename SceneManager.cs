@@ -3,9 +3,8 @@
 public static class SceneManager
 {
     private static List<Scene>? _scenes;
-    private static Scene? _currentScene;
 
-    public static Scene? CurrentScene => _currentScene;
+    public static Scene? CurrentScene { get; private set; }
 
     public static void Init(List<Scene> scenes)
     {
@@ -19,13 +18,12 @@ public static class SceneManager
         {
             throw new ArgumentOutOfRangeException(nameof(index), "Индекс вне диапазона");
         }
-        _currentScene = _scenes[index];
+        CurrentScene = _scenes[index];
     }
 
     public static void LoadScene(string name)
     {
         var scene = _scenes!.FirstOrDefault(s => s.Name == name);
-        _currentScene = scene ?? throw new ArgumentException($"Сцена с именем '{name}' не найдена", nameof(name));
+        CurrentScene = scene ?? throw new ArgumentException($"Сцена с именем '{name}' не найдена", nameof(name));
     }
-    
 }
