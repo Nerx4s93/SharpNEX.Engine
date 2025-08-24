@@ -2,6 +2,8 @@
 
 public interface IRenderer
 {
+    void Init(IntPtr hwnd);
+
     void BeginFrame();
     void EndFrame();
     void Clear(float r, float g, float b, float a);
