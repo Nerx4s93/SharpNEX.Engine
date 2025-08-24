@@ -1,23 +1,31 @@
 ﻿namespace SharpNEX.Engine;
 
-public class SceneManager(List<Scene> scenes)
+public static class SceneManager
 {
-    private Scene? _currentScene;
+    private static List<Scene>? _scenes;
+    private static Scene? _currentScene;
 
-    public Scene? CurrentScene => _currentScene;
+    public static Scene? CurrentScene => _currentScene;
 
-    public void LoadScene(int index)
+    public static void Init(List<Scene> scenes)
     {
-        if (index < 0 || index >= scenes.Count)
+        _scenes = scenes;
+        LoadScene(0);
+    }
+
+    public static void LoadScene(int index)
+    {
+        if (index < 0 || index >= _scenes!.Count)
         {
             throw new ArgumentOutOfRangeException(nameof(index), "Индекс вне диапазона");
         }
-        _currentScene = scenes[index];
+        _currentScene = _scenes[index];
     }
 
-    public void LoadScene(string name)
+    public static void LoadScene(string name)
     {
-        var scene = scenes.FirstOrDefault(s => s.Name == name);
+        var scene = _scenes!.FirstOrDefault(s => s.Name == name);
         _currentScene = scene ?? throw new ArgumentException($"Сцена с именем '{name}' не найдена", nameof(name));
     }
+    
 }
