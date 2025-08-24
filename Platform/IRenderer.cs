@@ -2,7 +2,7 @@
 
 public interface IRenderer
 {
-    void Init(IntPtr hwnd);
+    void Init(IntPtr hwnd, int width, int height);
 
     void BeginFrame();
     void EndFrame();
