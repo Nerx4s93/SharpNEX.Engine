@@ -4,20 +4,35 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace SharpNEX.Engine;
 
 [Serializable]
-public class GameObject(string name, List<Script> scripts)
+public class GameObject
 {
-    private readonly List<Script> _scripts = scripts;
+    private readonly List<Script> _scripts;
     private readonly HashSet<GameObject> _children = [];
 
     private Vector _position;
     private Rotation _rotation;
     private Vector _size;
 
-    public string Name = name;
+    public string Name;
 
     public GameObject? Parent { get; private set; }
 
-    public GameObject(string name) : this(name, []) { }
+    public GameObject(string name, List<Script> scripts)
+    {
+        Name = name;
+        _scripts = scripts;
+
+        foreach (var script in scripts)
+        {
+            script.GameObject = this;
+        }
+    }
+
+    public GameObject(string name)
+    {
+        Name = name;
+        _scripts = [];
+    }
 
     #region Описание игрового объекта
 
