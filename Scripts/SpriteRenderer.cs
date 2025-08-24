@@ -14,7 +14,7 @@ namespace SharpNEX.Engine.Scripts
             }
 
             var position = GameObject.Position;
-            Game.Renderer!.DrawTexture(Texture, position.X, position.Y, Texture.Height, Texture.Width);
+            Game.Renderer!.DrawTexture(Texture, position.X, position.Y, Texture.Width, Texture.Height);
         }
     }
 }
