@@ -11,23 +11,23 @@ public static class Game
     private static IWindow? _window;
     private static IRenderer? _renderer;
 
-    public static Scene? CurrentScene { get; internal set; }
+    private static SceneManager? _sceneManager;
     public static bool IsGameRun { get; private set; }
 
-    public static void Run(IPlatform platform, int width, int height, Scene scene)
+    public static void Run(IPlatform platform, int width, int height, List<Scene> scenes)
     {
-        CurrentScene = scene;
-
         _platform = platform;
-        IsGameRun = true;
 
         _window = _platform.CreateWindow("Game", width, height);
-
         _renderer = _platform.CreateRenderer(_window, "GDIRenderer");
         _renderer.Init(_window.Hwnd, width, height);
 
+        _sceneManager = new SceneManager(scenes);
+        _sceneManager.LoadScene(0);
+
         _gameThread = new Thread(GameLoop);
         _gameThread.Start();
+        IsGameRun = true;
 
         _window.Show();
     }
@@ -44,7 +44,7 @@ public static class Game
 
             _renderer.BeginFrame();
             _renderer.DrawTexture(texture, 50, 50, texture.Width, texture.Height);
-            CurrentScene!.Update();
+            _sceneManager!.CurrentScene!.Update();
             _renderer.EndFrame();
 
             stopwatch.Stop();
