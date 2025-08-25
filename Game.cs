@@ -13,12 +13,12 @@ public static class Game
 
     public static bool IsGameRun { get; private set; }
 
-    public static void Run(IPlatform platform, int width, int height, List<Scene> scenes)
+    public static void Run(IPlatform platform, string renderType, int width, int height, List<Scene> scenes)
     {
         Platform = platform;
 
         Window = Platform.CreateWindow("Game", width, height);
-        Renderer = Platform.CreateRenderer(Window, "GDIRenderer");
+        Renderer = Platform.CreateRenderer(Window, renderType);
 
         Renderer.Init(Window.Hwnd, width, height);
         SceneManager.Init(scenes);
