@@ -2,7 +2,7 @@
 using SharpNEX.Engine.Cache.Data;
 
 namespace SharpNEX.Engine.EngineMath;
-internal static class Trigonometry
+public static class Trigonometry
 {
     #region CacheManager
 
